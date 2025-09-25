@@ -240,13 +240,13 @@ If you have suggestions for improvements or find any issues:
 3. Make your changes
 4. Submit a pull request
 
-## � Additional Documentation
+## ➕ Additional Documentation
 
 For detailed information about the dark theme implementation, color customization, and advanced features, see:
 
 - **[DARK_THEME_GUIDE.md](DARK_THEME_GUIDE.md)** - Comprehensive guide to dark theme features and customization
 
-## �📄 License
+## 📄 License
 
 This resume template is available under the MIT License. Feel free to use it as a template for your own resume.
 

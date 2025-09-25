@@ -51,13 +51,23 @@ jobs:
           if [ -f "${{ matrix.theme.file }}" ]; then
             # Get the base filename without extension
             base_name=$(basename "${{ matrix.theme.file }}" .tex)
-            # Rename the generated PDF to themed name
-            if [ -f "${base_name}.pdf" ]; then
-              mv "${base_name}.pdf" "${{ matrix.theme.output }}"
-              echo "✅ Generated: ${{ matrix.theme.output }}"
+            # Check if renaming is needed (avoid renaming to same file)
+            if [ "${base_name}.pdf" != "${{ matrix.theme.output }}" ]; then
+              if [ -f "${base_name}.pdf" ]; then
+                mv "${base_name}.pdf" "${{ matrix.theme.output }}"
+                echo "✅ Renamed: ${base_name}.pdf → ${{ matrix.theme.output }}"
+              else
+                echo "❌ PDF not found: ${base_name}.pdf"
+                exit 1
+              fi
             else
-              echo "❌ PDF not found: ${base_name}.pdf"
-              exit 1
+              # PDF already has the correct name
+              if [ -f "${{ matrix.theme.output }}" ]; then
+                echo "✅ Generated: ${{ matrix.theme.output }} (no rename needed)"
+              else
+                echo "❌ PDF not found: ${{ matrix.theme.output }}"
+                exit 1
+              fi
             fi
           else
             echo "❌ Source file not found: ${{ matrix.theme.file }}"

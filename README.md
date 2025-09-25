@@ -140,16 +140,19 @@ The repository includes automated GitHub Actions that compile PDFs on every push
 This repository features a complete CI/CD pipeline that automatically:
 
 ### 🔄 **Automatic PDF Generation**
+
 - **Triggers**: Every push to `main` branch or when `.tex` files are modified
 - **Output**: Both light and dark theme PDFs are generated automatically
 - **Quality**: PDFs are validated for size, page count, and integrity
 
 ### 📦 **Release Management**
+
 - **Automatic Releases**: Creates GitHub releases with timestamp tags
 - **PDF Artifacts**: Both theme PDFs are attached to each release
 - **Download Links**: Easy access to latest compiled PDFs
 
 ### 🧪 **Pull Request Validation**
+
 - **Pre-merge Testing**: Validates compilation before merging changes
 - **Theme Testing**: Tests both light and dark themes for compatibility
 - **Build Status**: Clear success/failure indicators in PR status checks
@@ -157,24 +160,26 @@ This repository features a complete CI/CD pipeline that automatically:
 ### 📥 **Getting Latest PDFs**
 
 #### Option 1: GitHub Releases (Easiest)
+
 1. Go to [Releases](https://github.com/KarimmYasser/resume-latex/releases/latest)
 2. Download `resume-light.pdf` or `resume-dark.pdf`
 3. Always get the latest compiled version automatically!
 
 #### Option 2: GitHub Actions Artifacts
+
 1. Go to [Actions](https://github.com/KarimmYasser/resume-latex/actions)
 2. Click on the latest successful build
 3. Download artifacts from the build
 
 ### 🔧 **CI/CD Features**
 
-| Feature | Description | Status |
-|---------|-------------|--------|
-| **Multi-Theme Build** | Compiles both light and dark themes | ✅ Active |
-| **PDF Validation** | Checks file size, pages, and integrity | ✅ Active |
-| **Auto-Release** | Creates releases with PDFs on main branch | ✅ Active |
-| **PR Testing** | Tests compilation on pull requests | ✅ Active |
-| **Build Badges** | Shows build status in README | ✅ Active |
+| Feature               | Description                               | Status    |
+| --------------------- | ----------------------------------------- | --------- |
+| **Multi-Theme Build** | Compiles both light and dark themes       | ✅ Active |
+| **PDF Validation**    | Checks file size, pages, and integrity    | ✅ Active |
+| **Auto-Release**      | Creates releases with PDFs on main branch | ✅ Active |
+| **PR Testing**        | Tests compilation on pull requests        | ✅ Active |
+| **Build Badges**      | Shows build status in README              | ✅ Active |
 
 ### 🚀 **Benefits of Automated Pipeline**
 
@@ -182,7 +187,7 @@ This repository features a complete CI/CD pipeline that automatically:
 ✅ **Quality Assurance**: Automatic validation prevents broken builds  
 ✅ **Easy Access**: Download PDFs without needing LaTeX installation  
 ✅ **Version Control**: Each release is tagged and tracked  
-✅ **Collaboration**: PRs are automatically tested before merging  
+✅ **Collaboration**: PRs are automatically tested before merging
 
 ## 📝 Customization Guide
 

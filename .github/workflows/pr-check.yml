@@ -8,6 +8,12 @@ on:
       - "**.cls"
       - "**.sty"
 
+# Grant necessary permissions for PR checks
+permissions:
+  contents: read # Needed to checkout repository
+  checks: write # Needed to create check runs
+  pull-requests: read # Needed to read PR information
+
 jobs:
   test-compilation:
     name: 🔍 Test LaTeX Compilation

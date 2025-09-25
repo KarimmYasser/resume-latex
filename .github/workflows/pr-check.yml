@@ -1,0 +1,48 @@
+name: 🧪 LaTeX Resume PR Check
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.tex'
+      - '**.cls'
+      - '**.sty'
+
+jobs:
+  test-compilation:
+    name: 🔍 Test LaTeX Compilation
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        theme: [
+          { name: "light", file: "resume.tex" },
+          { name: "dark", file: "resume-dark.tex" }
+        ]
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Test LaTeX Compilation
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: ${{ matrix.theme.file }}
+        latexmk_use_xelatex: false
+        latexmk_shell_escape: true
+        extra_system_packages: |
+          py3-pygments
+          
+    - name: ✅ Compilation Success
+      run: |
+        echo "✅ ${{ matrix.theme.name }} theme compiled successfully!"
+        
+        # Check if PDF was generated
+        base_name=$(basename "${{ matrix.theme.file }}" .tex)
+        if [ -f "${base_name}.pdf" ]; then
+          echo "📄 PDF generated: ${base_name}.pdf"
+          echo "📏 File size: $(du -h "${base_name}.pdf" | cut -f1)"
+        else
+          echo "❌ PDF not found after compilation"
+          exit 1
+        fi

@@ -1,0 +1,229 @@
+name: 📄 LaTeX Resume CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.tex'
+      - '**.cls'
+      - '**.sty'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.tex'
+      - '**.cls'
+      - '**.sty'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  compile-resume:
+    name: 🔨 Compile LaTeX Resume
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        theme: [
+          { name: "light", file: "resume.tex", output: "resume-light.pdf" },
+          { name: "dark", file: "resume-dark.tex", output: "resume-dark.pdf" }
+        ]
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Setup LaTeX Environment
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: ${{ matrix.theme.file }}
+        latexmk_use_xelatex: false
+        latexmk_shell_escape: true
+        extra_system_packages: |
+          py3-pygments
+          
+    - name: 📝 Rename Output PDF
+      run: |
+        if [ -f "${{ matrix.theme.file }}" ]; then
+          # Get the base filename without extension
+          base_name=$(basename "${{ matrix.theme.file }}" .tex)
+          # Rename the generated PDF to themed name
+          if [ -f "${base_name}.pdf" ]; then
+            mv "${base_name}.pdf" "${{ matrix.theme.output }}"
+            echo "✅ Generated: ${{ matrix.theme.output }}"
+          else
+            echo "❌ PDF not found: ${base_name}.pdf"
+            exit 1
+          fi
+        else
+          echo "❌ Source file not found: ${{ matrix.theme.file }}"
+          exit 1
+        fi
+        
+    - name: 📊 Check PDF Properties
+      run: |
+        if [ -f "${{ matrix.theme.output }}" ]; then
+          echo "📄 PDF Information for ${{ matrix.theme.name }} theme:"
+          pdfinfo "${{ matrix.theme.output }}" || true
+          echo "📏 File size: $(du -h "${{ matrix.theme.output }}" | cut -f1)"
+        fi
+        
+    - name: 📤 Upload PDF Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: resume-${{ matrix.theme.name }}-theme
+        path: ${{ matrix.theme.output }}
+        retention-days: 90
+        
+  create-release:
+    name: 🚀 Create Release with PDFs
+    needs: compile-resume
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 📥 Download Light Theme PDF
+      uses: actions/download-artifact@v4
+      with:
+        name: resume-light-theme
+        path: ./artifacts/
+        
+    - name: 📥 Download Dark Theme PDF
+      uses: actions/download-artifact@v4
+      with:
+        name: resume-dark-theme
+        path: ./artifacts/
+        
+    - name: 🏷️ Generate Release Tag
+      id: tag
+      run: |
+        # Generate timestamp-based tag
+        TAG="v$(date +'%Y.%m.%d')-$(date +'%H%M')"
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
+        echo "Generated tag: $TAG"
+        
+    - name: 📋 Generate Release Notes
+      id: release_notes
+      run: |
+        # Get commit messages since last release
+        NOTES="## 📄 Resume Update - $(date +'%B %d, %Y')
+
+        ### 🎯 What's Included
+        - **Light Theme Resume**: Professional version optimized for printing and traditional viewing
+        - **Dark Theme Resume**: Modern version perfect for digital portfolios and online sharing
+        
+        ### 🔧 Build Information
+        - **Commit**: \`${{ github.sha }}\`
+        - **Branch**: \`${{ github.ref_name }}\`
+        - **Triggered by**: ${{ github.event_name }}
+        
+        ### 📥 Download Instructions
+        1. Click on the PDF files below to download
+        2. **Light Theme**: Best for printing and ATS systems
+        3. **Dark Theme**: Best for digital viewing and modern portfolios
+        
+        ### 🔄 Changes in This Release"
+        
+        # Add recent commit messages
+        git log --pretty=format:"- %s" -n 5 >> release_notes.txt
+        
+        echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+        echo "$NOTES" >> $GITHUB_OUTPUT
+        echo "" >> $GITHUB_OUTPUT
+        cat release_notes.txt >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+    - name: 🚀 Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag.outputs.tag }}
+        name: "Resume - ${{ steps.tag.outputs.tag }}"
+        body: ${{ steps.release_notes.outputs.NOTES }}
+        draft: false
+        prerelease: false
+        files: |
+          ./artifacts/resume-light.pdf
+          ./artifacts/resume-dark.pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+  validate-pdfs:
+    name: 🔍 Validate Generated PDFs
+    needs: compile-resume
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./pdfs/
+        
+    - name: 🔍 Validate PDFs
+      run: |
+        echo "🔍 Validating generated PDFs..."
+        
+        for theme_dir in ./pdfs/resume-*-theme/; do
+          if [ -d "$theme_dir" ]; then
+            theme_name=$(basename "$theme_dir" | sed 's/resume-\(.*\)-theme/\1/')
+            echo "📄 Checking $theme_name theme..."
+            
+            for pdf in "$theme_dir"/*.pdf; do
+              if [ -f "$pdf" ]; then
+                echo "  ✅ Found: $(basename "$pdf")"
+                
+                # Check if PDF is valid
+                if pdfinfo "$pdf" > /dev/null 2>&1; then
+                  echo "  ✅ PDF is valid"
+                  
+                  # Check file size (should be reasonable for a resume)
+                  size=$(du -k "$pdf" | cut -f1)
+                  if [ "$size" -gt 50 ] && [ "$size" -lt 5000 ]; then
+                    echo "  ✅ File size OK: ${size}KB"
+                  else
+                    echo "  ⚠️  Unusual file size: ${size}KB"
+                  fi
+                  
+                  # Check page count (should be 1-3 pages for a resume)
+                  pages=$(pdfinfo "$pdf" | grep "Pages:" | awk '{print $2}')
+                  if [ "$pages" -ge 1 ] && [ "$pages" -le 3 ]; then
+                    echo "  ✅ Page count OK: $pages pages"
+                  else
+                    echo "  ⚠️  Unusual page count: $pages pages"
+                  fi
+                else
+                  echo "  ❌ PDF validation failed"
+                  exit 1
+                fi
+              else
+                echo "  ❌ No PDF found in $theme_dir"
+                exit 1
+              fi
+            done
+          fi
+        done
+        
+        echo "🎉 All PDFs validated successfully!"
+        
+  notify-status:
+    name: 📢 Notify Build Status
+    needs: [compile-resume, validate-pdfs]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: 📢 Build Success Notification
+      if: needs.compile-resume.result == 'success' && needs.validate-pdfs.result == 'success'
+      run: |
+        echo "🎉 Resume compilation successful!"
+        echo "✅ Light theme PDF generated"
+        echo "✅ Dark theme PDF generated"
+        echo "✅ All validations passed"
+        
+    - name: 📢 Build Failure Notification
+      if: needs.compile-resume.result == 'failure' || needs.validate-pdfs.result == 'failure'
+      run: |
+        echo "❌ Resume compilation failed!"
+        echo "Please check the logs for details."
+        exit 1

@@ -124,7 +124,7 @@ jobs:
         run: |
           # Create a unique delimiter
           DELIMITER="release_notes_$(date +%s)"
-          
+
           # Generate release notes and set as output
           echo "NOTES<<$DELIMITER" >> $GITHUB_OUTPUT
           echo "## 📄 Resume Update - $(date +'%B %d, %Y')" >> $GITHUB_OUTPUT

@@ -20,6 +20,7 @@
 *.figlist
 *.makefile
 *.xdv
+*.pdf
 
 # Bibliography files
 *.run.xml

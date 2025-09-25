@@ -111,6 +111,37 @@ jobs:
           name: resume-dark-theme
           path: ./artifacts/
 
+      - name: 🔍 List Downloaded Files
+        run: |
+          echo "📋 Files in artifacts directory:"
+          find ./artifacts/ -type f -name "*.pdf" -exec ls -la {} \;
+          echo "📂 Directory structure:"
+          find ./artifacts/ -type f
+
+      - name: 📄 Prepare PDFs for Release
+        run: |
+          # Ensure PDFs are in the correct location
+          mkdir -p ./release-assets/
+
+          # Find and copy PDFs to release directory
+          find ./artifacts/ -name "resume-light.pdf" -exec cp {} ./release-assets/resume-light.pdf \;
+          find ./artifacts/ -name "resume-dark.pdf" -exec cp {} ./release-assets/resume-dark.pdf \;
+
+          # Verify files exist
+          echo "📄 PDFs prepared for release:"
+          ls -la ./release-assets/
+
+          # Validate PDFs are not empty
+          for pdf in ./release-assets/*.pdf; do
+            if [ -f "$pdf" ]; then
+              size=$(du -h "$pdf" | cut -f1)
+              echo "✅ $(basename "$pdf"): $size"
+            else
+              echo "❌ Missing: $(basename "$pdf")"
+              exit 1
+            fi
+          done
+
       - name: 🏷️ Generate Release Tag
         id: tag
         run: |
@@ -156,8 +187,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./artifacts/resume-light.pdf
-            ./artifacts/resume-dark.pdf
+            ./release-assets/resume-light.pdf
+            ./release-assets/resume-dark.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

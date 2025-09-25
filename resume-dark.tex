@@ -17,16 +17,16 @@ footskip=1.0 cm, % seperation between body and footer
 \usepackage{pagecolor} % for setting page background color
 
 % Theme Configuration
-% Uncomment the next line to enable dark theme
-% \newcommand{\darktheme}{}
+% Dark theme enabled for this version
+\newcommand{\darktheme}{}
 
 % Color definitions based on theme
 \ifdefined\darktheme
     % Dark Theme Colors
     \definecolor{primaryColor}{RGB}{255, 255, 255} % White text
     \definecolor{backgroundColor}{RGB}{33, 37, 41} % Dark background
-    \definecolor{sectionColor}{RGB}{108, 117, 125} % Light gray for sections
-    \definecolor{accentColor}{RGB}{0, 123, 255} % Blue accent
+    \definecolor{sectionColor}{RGB}{255, 255, 255} % White for sections
+    \definecolor{accentColor}{RGB}{64, 162, 255} % Bright blue accent
     \definecolor{textColor}{RGB}{248, 249, 250} % Light text
     \definecolor{subtextColor}{RGB}{173, 181, 189} % Muted text
 \else
@@ -48,7 +48,7 @@ footskip=1.0 cm, % seperation between body and footer
 \usepackage{fontawesome5} % for using icons
 \usepackage{amsmath} % for math
 \usepackage[
-pdftitle={Karim Yasser's CV},
+pdftitle={Karim Yasser's CV - Dark Theme},
 pdfauthor={Karim Yasser},
 pdfcreator={LaTeX with RenderCV},
 colorlinks=true,

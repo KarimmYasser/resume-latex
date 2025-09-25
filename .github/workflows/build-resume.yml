@@ -153,30 +153,10 @@ jobs:
       - name: 📋 Generate Release Notes
         id: release_notes
         run: |
-          # Create a unique delimiter
-          DELIMITER="release_notes_$(date +%s)"
-
-          # Generate release notes and set as output
-          echo "NOTES<<$DELIMITER" >> $GITHUB_OUTPUT
-          echo "## 📄 Resume Update - $(date +'%B %d, %Y')" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "### 🎯 What's Included" >> $GITHUB_OUTPUT
-          echo "- **Light Theme Resume**: Professional version optimized for printing and traditional viewing" >> $GITHUB_OUTPUT
-          echo "- **Dark Theme Resume**: Modern version perfect for digital portfolios and online sharing" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "### 🔧 Build Information" >> $GITHUB_OUTPUT
-          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_OUTPUT
-          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_OUTPUT
-          echo "- **Triggered by**: ${{ github.event_name }}" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "### 📥 Download Instructions" >> $GITHUB_OUTPUT
-          echo "1. Click on the PDF files below to download" >> $GITHUB_OUTPUT
-          echo "2. **Light Theme**: Best for printing and ATS systems" >> $GITHUB_OUTPUT
-          echo "3. **Dark Theme**: Best for digital viewing and modern portfolios" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "### 🔄 Changes in This Release" >> $GITHUB_OUTPUT
-          git log --pretty=format:"- %s" -n 5 >> $GITHUB_OUTPUT
-          echo "$DELIMITER" >> $GITHUB_OUTPUT
+          # Generate simple release notes as a single line (avoid multi-line issues)
+          SIMPLE_NOTES="📄 Resume Update - $(date +'%B %d, %Y'). Includes Light Theme (ATS-optimized) and Dark Theme (digital portfolio) PDFs. Commit: ${{ github.sha }}"
+          echo "NOTES=$SIMPLE_NOTES" >> $GITHUB_OUTPUT
+          echo "Generated release notes: $SIMPLE_NOTES"
 
       - name: 🚀 Create Release
         uses: softprops/action-gh-release@v1

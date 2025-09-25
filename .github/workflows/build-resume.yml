@@ -122,34 +122,30 @@ jobs:
       - name: 📋 Generate Release Notes
         id: release_notes
         run: |
-          # Generate release notes
-          echo "## 📄 Resume Update - $(date +'%B %d, %Y')" > release_notes.md
-          echo "" >> release_notes.md
-          echo "### 🎯 What's Included" >> release_notes.md
-          echo "- **Light Theme Resume**: Professional version optimized for printing and traditional viewing" >> release_notes.md
-          echo "- **Dark Theme Resume**: Modern version perfect for digital portfolios and online sharing" >> release_notes.md
-          echo "" >> release_notes.md
-          echo "### 🔧 Build Information" >> release_notes.md
-          echo "- **Commit**: \`${{ github.sha }}\`" >> release_notes.md
-          echo "- **Branch**: \`${{ github.ref_name }}\`" >> release_notes.md
-          echo "- **Triggered by**: ${{ github.event_name }}" >> release_notes.md
-          echo "" >> release_notes.md
-          echo "### 📥 Download Instructions" >> release_notes.md
-          echo "1. Click on the PDF files below to download" >> release_notes.md
-          echo "2. **Light Theme**: Best for printing and ATS systems" >> release_notes.md
-          echo "3. **Dark Theme**: Best for digital viewing and modern portfolios" >> release_notes.md
-          echo "" >> release_notes.md
-          echo "### 🔄 Changes in This Release" >> release_notes.md
-          git log --pretty=format:"- %s" -n 5 >> release_notes.md
+          # Create a unique delimiter
+          DELIMITER="release_notes_$(date +%s)"
           
-          # Set output using file method to avoid EOF issues
-          {
-            echo 'NOTES<<EOF'
-            cat release_notes.md
-            echo 'EOF'
-          } >> $GITHUB_OUTPUT
-
-      - name: 🚀 Create Release
+          # Generate release notes and set as output
+          echo "NOTES<<$DELIMITER" >> $GITHUB_OUTPUT
+          echo "## 📄 Resume Update - $(date +'%B %d, %Y')" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### 🎯 What's Included" >> $GITHUB_OUTPUT
+          echo "- **Light Theme Resume**: Professional version optimized for printing and traditional viewing" >> $GITHUB_OUTPUT
+          echo "- **Dark Theme Resume**: Modern version perfect for digital portfolios and online sharing" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### 🔧 Build Information" >> $GITHUB_OUTPUT
+          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_OUTPUT
+          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_OUTPUT
+          echo "- **Triggered by**: ${{ github.event_name }}" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### 📥 Download Instructions" >> $GITHUB_OUTPUT
+          echo "1. Click on the PDF files below to download" >> $GITHUB_OUTPUT
+          echo "2. **Light Theme**: Best for printing and ATS systems" >> $GITHUB_OUTPUT
+          echo "3. **Dark Theme**: Best for digital viewing and modern portfolios" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### 🔄 Changes in This Release" >> $GITHUB_OUTPUT
+          git log --pretty=format:"- %s" -n 5 >> $GITHUB_OUTPUT
+          echo "$DELIMITER" >> $GITHUB_OUTPUT      - name: 🚀 Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.tag }}

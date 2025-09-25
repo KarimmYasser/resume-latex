@@ -1,0 +1,497 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+ignoreheadfoot, % set margins without considering header and footer
+top=1 cm, % seperation between body and page edge from the top
+bottom=2 cm, % seperation between body and page edge from the bottom
+left=2 cm, % seperation between body and page edge from the left
+right=2 cm, % seperation between body and page edge from the right
+footskip=1.0 cm, % seperation between body and footer
+% showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+pdftitle={Karim Yasser's CV},
+pdfauthor={Karim Yasser},
+pdfcreator={LaTeX with RenderCV},
+colorlinks=true,
+urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+% left space:
+-1pt
+}{
+% top space:
+0.3 cm
+}{
+% bottom space:
+0.1 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+\begin{itemize}[
+topsep=0.10 cm,
+parsep=0.10 cm,
+partopsep=0pt,
+itemsep=0pt,
+leftmargin=0 cm + 10pt
+]
+}{
+\end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+\begin{itemize}[
+topsep=0.10 cm,
+parsep=0.10 cm,
+partopsep=0pt,
+itemsep=0pt,
+leftmargin=10pt
+]
+}{
+\end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+\begin{adjustwidth}{
+0 cm + 0.00001 cm
+}{
+0 cm + 0.00001 cm
+}
+}{
+\end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+\onecolentry
+\def\secondColumn{#2}
+\setcolumnwidth{\fill, 4.5 cm}
+\begin{paracol}{2}
+}{
+\switchcolumn \raggedleft \secondColumn
+\end{paracol}
+\endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+\onecolentry
+\def\thirdColumn{#3}
+\setcolumnwidth{, \fill, 4.5 cm}
+\begin{paracol}{3}
+{\raggedright #2} \switchcolumn
+}{
+\switchcolumn \raggedleft \thirdColumn
+\end{paracol}
+\endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+\setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+\par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+\AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+\put(
+\LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+\LenToUnit{\paperheight-1.0 cm}
+)
+}%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+
+
+\begin{document}
+\newcommand{\AND}{\unskip
+\cleaders\copy\ANDbox\hskip\wd\ANDbox
+\ignorespaces
+}
+\newsavebox\ANDbox
+\sbox\ANDbox{$|$}
+
+\begin{header}
+\fontsize{25 pt}{25 pt}\selectfont Karim Yasser
+
+\vspace{5 pt}
+
+\normalsize
+\mbox{Location: Cairo, Egypt}%
+\kern 5.0 pt%
+\AND%
+\kern 5.0 pt%
+\mbox{\hrefWithoutArrow{mailto:karimmyasserr@gmail.com}{Email: karimmyasserr@gmail.com}}%
+\kern 5.0 pt%
+\AND%
+\kern 5.0 pt%
+\mbox{\hrefWithoutArrow{tel:+201144432284}{+201144432284}}%
+\kern 5.0 pt%
+\AND%
+\kern 5.0 pt%
+\mbox{\hrefWithoutArrow{https://www.linkedin.com/in/karimmyasserr/ }{ 
+www.linkedin.com/in/karimmyasserr}}%
+\kern 5.0 pt%
+\AND%
+\kern 5.0 pt%
+\mbox{\hrefWithoutArrow{https://github.com/KarimmYasser}{GitHub: KarimmYasser}}%
+\kern 5.0 pt%
+\AND%
+\kern 5.0 pt%
+\mbox{\hrefWithoutArrow{https://karim-yasser.vercel.app}{Portfolio: karim-yasser}}%
+\end{header}
+
+\vspace{5 pt - 0.3 cm}
+
+\section{Professional Summary}
+\begin{onecolentry}
+\begin{highlights}
+Computer Engineer experienced in creating mobile and web applications that are reliable, scalable, and user-friendly. Strong background in problem-solving and applying modern software practices to real projects, from operating system algorithms to search engine solutions. Skilled at turning complex ideas into practical applications that deliver value to end users, with additional expertise in data science for extracting insights and building intelligent solutions.
+\end{highlights}
+\end{onecolentry}
+
+
+\section{Education}
+\vspace{0.1cm}
+\begin{twocolentry} {2022 - 2027} 
+\textbf{CAIRO UNIVERSITY, FACULTY OF ENGINEERING}
+\end{twocolentry}
+
+\vspace{0.10cm}
+
+\begin{onecolentry}
+\begin{highlights}
+\item
+Bachelor of \textbf{Computer Engineering }
+
+
+\item
+\textbf{Cumulative Grade: Excellent}
+
+\item
+\textbf{Relevant Coursework:} Data Structures, Algorithms, OOP, Operating systems, Microprocessors, Programming Techniques, Image Processing, Neural Networks, Machine Intelligence
+
+\end{highlights}
+\end{onecolentry}
+
+
+
+
+\section{Experience}
+\vspace{0.1cm}
+\begin{twocolentry}{
+July 2025 - Present
+}
+\textbf{\large Software Developer} - I'SUPPLY
+\end{twocolentry}
+\vspace{0.1 cm}
+
+\begin{onecolentry}
+\begin{highlights}
+\item
+Secured first place out of 30+ teams in a hackathon hosted by I’SUPPLY, leading to a full-time job offer.
+\item
+Attended team planning meetings and met the tech department, including back-end engineers and QA testers to become familiar with team roles and ongoing projects.
+\item
+Upon opening the company's Flutter codebase, we reviewed the interface architecture, state management practices, and project structure to prepare for future feature development and contributions.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+\begin{twocolentry}{
+June 2025 - Present
+}
+\textbf{\large Data Science Trainee} - Digital Egypt Pioneers Initiative (DEPI)
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+
+\item
+Currently enrolled in IBM’s Data Scientist track, gaining hands-on experience with Python, SQL, data analysis, and machine learning.
+
+\item
+Working with MLOps tools such as MLflow and HuggingFace while progressing through courses in Python, data visualization, and prompt engineering.
+
+\item
+Contributing to a capstone project that integrates advanced practices with real-world problem solving.
+
+\end{highlights}
+\end{onecolentry}
+
+
+\vspace{0.2 cm}
+\begin{twocolentry}{
+July 2025 - September 2025
+}
+\textbf{\large Android Developer with Kotlin} - Banque Misr
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+
+\item
+Focused on advanced Android development using Kotlin, Jetpack, and Room Database to build scalable mobile applications, while applying modern practices to enhance performance, maintainability, and user experience.
+
+\end{highlights}
+\end{onecolentry}
+
+
+\vspace{0.2 cm}
+\begin{twocolentry}{
+July 2025 - August 2025
+}
+\textbf{\large Flutter Developer with Machine Learning} - Informatique
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+
+\item Completed an internship focused on Flutter and Machine Learning to deliver practical mobile solutions.
+
+\item Strengthened ability to combine mobile development with ML techniques through hands-on project work.
+
+\end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+\begin{twocolentry}{
+Feb 2025 - Present
+}
+\textbf{\large Flutter Instructor} - IEEE Cairo University SB
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+
+\item Guided and delivered a comprehensive Flutter curriculum to more than 30 students, covering state management, API integration, and advanced UI/UX principles with 90\% positive feedback.
+\item Mentored students through technical challenges, providing code reviews and optimization suggestions that improved project quality by 35\%.
+\end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+
+
+\begin{twocolentry}{
+Jan 2025 - March 2025
+}
+\textbf{\large Mobile App Development Trainee} - Orange Digital Center
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+
+\item Completed an intensive 96-hour \textbf{Flutter} training program, mastering cross-platform mobile development fundamentals and advanced state management techniques.
+
+
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+Oct 2024 - Jan 2025
+}
+\textbf{\large Flutter Developer Intern} - SlashHub
+\end{twocolentry}
+\vspace{0.1 cm}
+\begin{onecolentry}
+\begin{highlights}
+\item Reactive UI components crafted for an AI-powered e-Commerce chatbot using \textbf{Flutter}, improving user interaction metrics by 25\% and reducing bounce rates.
+\end{highlights}
+\end{onecolentry}
+
+\newpage
+
+
+\section{Projects}
+
+\vspace{0.10 cm}
+
+\begin{twocolentry}{
+\mbox{
+Jun 2025 | \hrefWithoutArrow{https://github.com/KarimmYasser/isupply_app}{GitHub}}%
+}
+\textbf{i'Supply POS App}
+\end{twocolentry}
+
+\vspace{0.20 cm}
+
+\begin{onecolentry}
+\begin{highlights}
+\item Improved and developed a cross-platform \textbf{Flutter} POS system conceptualized for desktop and mobile, enabling inventory search, cart management, and checkout operations.
+\item Integrated \textbf{Hive} for local storage and \textbf{Supabase} as a remote backend, with seamless offline-first synchronization between local and cloud databases.
+\item Implemented invoice tracking and handled more than \textbf{1000+ products} using paginated lists.
+\item Built for a hackathon by i'Supply and awarded \textbf{first place}, earning an internship opportunity.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{
+Mar 2025 - May 2025 | \hrefWithoutArrow{https://github.com/ZengebaryRobot/flutter-app}{GitHub}}%
+}
+\textbf{Zengbary App}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Developed a Flutter app to remotely control a microprocessor-based robot with HTTP communication.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Nov 2024 - Dec 2024 | \hrefWithoutArrow{https://www.linkedin.com/posts/karimmyasserr_fashionassistant-slashhub-flutter-activity-7278548671153999872-Vkj2}{LinkedIn}}%
+}
+\textbf{Fashion Assistant – E-commerce Platform}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Built a personalized shopping assistant with a chatbot and product recommendation system.
+\end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Mar 2025 – May 2025 | \hrefWithoutArrow{https://github.com/AhmedSobhy01/sher-look}{GitHub}}%
+}
+\textbf{Sherlook Web Engine}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Built a web search engine with a custom crawler, indexer, and ranking algorithm processing 50K+ pages.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Mar 2025 – May 2025 | \hrefWithoutArrow{https://github.com/Hussein-Mohamed1/kernel-sim-ohh-s}{GitHub}}%
+}
+\textbf{OS Process Scheduler Simulator}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Simulated multiple CPU scheduling algorithms (FCFS, SJF, Priority, Round Robin) with real-time visualization and metric comparisons.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Jun 2024 - July 2024 | \hrefWithoutArrow{https://github.com/KarimmYasser/Cooking-up-application}{GitHub}}%
+}
+\textbf{Cooking Up App}
+\end{twocolentry}
+
+
+\begin{onecolentry}
+\begin{highlights}
+Established a Flutter-based recipe app with offline access, filters, and interactive cooking tools.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Nov 2024 - Dec 2024 | \hrefWithoutArrow{https://github.com/KarimmYasser/brick-breaker-pro}{GitHub}}%
+}
+\textbf{Bricks Breaker – Multiplayer Assembly Game}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Built a real-time multiplayer brick breaker game using Assembly with custom networking and graphics logic.
+\end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\mbox{Feb 2024 – Apr 2024 | \hrefWithoutArrow{https://github.com/KarimmYasser/AES}{GitHub}}%
+}
+\textbf{AES Encryption – FPGA Implementation}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+Redesigned AES-128/192/256 in Verilog for FPGA, achieving 40\% faster encryption using pipelining and parallelism.
+\end{highlights}
+\end{onecolentry}
+
+
+
+\vspace{0.2 cm}
+
+
+\section{Technical Skills}
+\vspace{0.1cm}
+
+\begin{highlights}
+\item \textbf{Languages:} Dart, C++, C\#, Java, Python, JavaScript, SQL, Assembly, HTML/CSS
+\item \textbf{Frameworks \& Libraries:} Flutter, Bloc, Cubit, Provider, GetX, Firebase, Dio, Hive, Supabase, RESTful APIs
+\item \textbf{Tools \& Platforms:} Git, GitHub, VS Code, Android Studio, Figma, Jira, FPGA Development
+\item \textbf{Core Concepts:} Clean Architecture, SOLID Principles, State Management, OOP, Algorithms \& Data Structures, OS Algorithms
+\end{highlights}
+
+\section{Soft Skills}
+\vspace{0.1cm}
+
+\begin{highlights}
+\item Strong \textbf{problem-solving} and \textbf{analytical thinking}
+\item Effective \textbf{communication} and \textbf{teamwork}
+\item \textbf{Adaptability} and \textbf{continuous learning} mindset
+\item \textbf{Time management} and ability to meet tight deadlines
+\item \textbf{Leadership} and collaboration in cross-functional teams
+\end{highlights}
+
+\end{document}

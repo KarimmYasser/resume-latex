@@ -1,7 +1,6 @@
 # LaTeX Resume - Karim Yasser
 
 [![📄 LaTeX Resume CI/CD](https://github.com/KarimmYasser/resume-latex/actions/workflows/build-resume.yml/badge.svg)](https://github.com/KarimmYasser/resume-latex/actions/workflows/build-resume.yml)
-[![🧪 PR Check](https://github.com/KarimmYasser/resume-latex/actions/workflows/pr-check.yml/badge.svg)](https://github.com/KarimmYasser/resume-latex/actions/workflows/pr-check.yml)
 [![📥 Latest Release](https://img.shields.io/github/v/release/KarimmYasser/resume-latex?label=Latest%20PDFs)](https://github.com/KarimmYasser/resume-latex/releases/latest)
 [![📊 Repository Size](https://img.shields.io/github/repo-size/KarimmYasser/resume-latex)](https://github.com/KarimmYasser/resume-latex)
 

@@ -192,55 +192,55 @@ leftmargin=10pt
 \input{resume-content.tex}
 
 \newcommand{\AND}{\unskip
-\cleaders\copy\ANDbox\hskip\wd\ANDbox
-\ignorespaces
+	\cleaders\copy\ANDbox\hskip\wd\ANDbox
+	\ignorespaces
 }
 \newsavebox\ANDbox
 \sbox\ANDbox{$|$}
 
 \begin{header}
-\fontsize{25 pt}{25 pt}\selectfont {\color{primaryColor}\myName}
-
-\vspace{5 pt}
-
-\normalsize\color{subtextColor}
-\mbox{\myLocation}%
-\kern 5.0 pt%
-\AND%
-\kern 5.0 pt%
-\mbox{\hrefWithoutArrow{mailto:\myEmail}{\myEmail}}%
-\kern 5.0 pt%
-\AND%
-\kern 5.0 pt%
-\mbox{\hrefWithoutArrow{tel:\myPhone}{\myPhone}}%
-\kern 5.0 pt%
-\AND%
-\kern 5.0 pt%
-\mbox{\hrefWithoutArrow{\myGithubLink}{\myGithub}}%
-\kern 5.0 pt%
-\AND%
-\kern 5.0 pt%
-\mbox{\hrefWithoutArrow{\myLinkedinLink}{\myLinkedin}}%
-\kern 5.0 pt%
-\AND%
-\kern 5.0 pt%
-\mbox{\hrefWithoutArrow{\myPortfolioLink}{\myPortfolio}}%
+	\fontsize{25 pt}{25 pt}\selectfont {\color{primaryColor}\myName}
+	
+	\vspace{5 pt}
+	
+	\normalsize\color{subtextColor}
+	\mbox{\myLocation}%
+	\kern 5.0 pt%
+	\AND%
+	\kern 5.0 pt%
+	\mbox{\hrefWithoutArrow{mailto:\myEmail}{\myEmail}}%
+	\kern 5.0 pt%
+	\AND%
+	\kern 5.0 pt%
+	\mbox{\hrefWithoutArrow{tel:\myPhone}{\myPhone}}%
+	\kern 5.0 pt%
+	\AND%
+	\kern 5.0 pt%
+	\mbox{\hrefWithoutArrow{\myGithubLink}{\myGithub}}%
+	\kern 5.0 pt%
+	\AND%
+	\kern 5.0 pt%
+	\mbox{\hrefWithoutArrow{\myLinkedinLink}{\myLinkedin}}%
+	\kern 5.0 pt%
+	\AND%
+	\kern 5.0 pt%
+	\mbox{\hrefWithoutArrow{\myPortfolioLink}{\myPortfolio}}%
 \end{header}
 
 \vspace{5 pt - 0.3 cm}
 
 \section{Summary}
 \begin{onecolentry}
-\begin{highlights}
-\mySummary
-\end{highlights}
+	\begin{highlights}
+		\mySummary
+	\end{highlights}
 \end{onecolentry}
 
 
 \section{Education}
 \vspace{0.1cm}
-\begin{twocolentry}{\myEducationDate} 
-\textbf{\myUniversity}
+\begin{twocolentry}{\myEducationDate}
+	\textbf{\myUniversity}
 \end{twocolentry}
 
 \vspace{0.10cm}
@@ -255,36 +255,36 @@ leftmargin=10pt
 
 % Loop through all experiences
 \newcommand{\experienceItem}[4]{%
-    \begin{samepage}%
-    \begin{twocolentry}{#3}%
-    \textbf{\large #1} - #2%
-    \end{twocolentry}%
-    \vspace{0.1 cm}%
-    \begin{onecolentry}%
-    \begin{highlights}%
-    #4%
-    \end{highlights}%
-    \end{onecolentry}%
-    \end{samepage}%
-    \vspace{0.2cm}%
+	\begin{samepage}%
+		\begin{twocolentry}{#3}%
+			\textbf{\large #1} - #2%
+		\end{twocolentry}%
+		\vspace{0.1 cm}%
+		\begin{onecolentry}%
+			\begin{highlights}%
+				#4%
+			\end{highlights}%
+		\end{onecolentry}%
+	\end{samepage}%
+	\vspace{0.2cm}%
 }
 
 % Process experience list with delimiter
 \newcommand{\processExperiences}[1]{%
-  \processExperiencesAux#1\relax
+	\processExperiencesAux#1\relax
 }
 
 \long\def\processExperiencesAux#1#2#3#4|||#5\relax{%
-  \ifx\relax#1\relax
-    % Stop if nothing left
-  \else
-    \experienceItem{#1}{#2}{#3}{#4}%
-    \ifx\relax#5\relax
-      % No more entries — stop
-    \else
-      \expandafter\processExperiencesAux#5\relax
-    \fi
-  \fi
+	\ifx\relax#1\relax
+		% Stop if nothing left
+	\else
+		\experienceItem{#1}{#2}{#3}{#4}%
+		\ifx\relax#5\relax
+			% No more entries — stop
+		\else
+			\expandafter\processExperiencesAux#5\relax
+		\fi
+	\fi
 }
 
 \expandafter\processExperiences\expandafter{\experienceList}
@@ -296,37 +296,37 @@ leftmargin=10pt
 
 % Loop through all projects
 \newcommand{\projectItem}[4]{%
-    \begin{samepage}%
-    \begin{twocolentry}{%
-    \mbox{#1 | \hrefWithoutArrow{#2}{GitHub}}%
-    }%
-    \textbf{#3}%
-    \end{twocolentry}%
-    \begin{onecolentry}%
-    \begin{highlights}%
-    #4%
-    \end{highlights}%
-    \end{onecolentry}%
-    \end{samepage}%
-    \vspace{0.1 cm}%
+	\begin{samepage}%
+		\begin{twocolentry}{%
+				\mbox{#1 | \hrefWithoutArrow{#2}{GitHub}}%
+			}%
+			\textbf{#3}%
+		\end{twocolentry}%
+		\begin{onecolentry}%
+			\begin{highlights}%
+				#4%
+			\end{highlights}%
+		\end{onecolentry}%
+	\end{samepage}%
+	\vspace{0.1 cm}%
 }
 
 % Process projects list with delimiter
 \newcommand{\processProjects}[1]{%
-    \processProjectsAux#1\relax
+	\processProjectsAux#1\relax
 }
 
 \long\def\processProjectsAux#1#2#3#4|||#5\relax{%
-  \ifx\relax#1\relax
-    % Stop if nothing left
-  \else
-    \projectItem{#1}{#2}{#3}{#4}%
-    \ifx\relax#5\relax
-      % No more entries — stop
-    \else
-      \expandafter\processProjectsAux#5\relax
-    \fi
-  \fi
+	\ifx\relax#1\relax
+		% Stop if nothing left
+	\else
+		\projectItem{#1}{#2}{#3}{#4}%
+		\ifx\relax#5\relax
+			% No more entries — stop
+		\else
+			\expandafter\processProjectsAux#5\relax
+		\fi
+	\fi
 }
 
 \expandafter\processProjects\expandafter{\projectsList}
@@ -334,31 +334,31 @@ leftmargin=10pt
 \vspace{0.2 cm}
 
 \begin{samepage}
-\section{Technical Skills}
-\vspace{0.1cm}
-\begin{highlights}
-\item \textbf{Programming Languages:} \programmingLanguages
-\item \textbf{Mobile Development:} \mobileDevelopment
-\item \textbf{Frameworks \& Libraries:} \frameworksLibraries
-\item \textbf{Backend \& Database:} \backendDatabase
-\item \textbf{Development Tools:} \developmentTools
-\item \textbf{Software Engineering:} \softwareEngineering
-\item \textbf{Data Science:} \dataScience
-\item \textbf{Artificial Intelligence:} \artificialIntelligence
-\item \textbf{Specialized Skills:} \specializedSkills
-\end{highlights}
+	\section{Technical Skills}
+	\vspace{0.1cm}
+	\begin{highlights}
+		\item \textbf{Programming Languages:} \programmingLanguages
+		\item \textbf{Mobile Development:} \mobileDevelopment
+		\item \textbf{Frameworks \& Libraries:} \frameworksLibraries
+		\item \textbf{Backend \& Database:} \backendDatabase
+		\item \textbf{Development Tools:} \developmentTools
+		\item \textbf{Software Engineering:} \softwareEngineering
+		\item \textbf{Data Science:} \dataScience
+		\item \textbf{Artificial Intelligence:} \artificialIntelligence
+		\item \textbf{Specialized Skills:} \specializedSkills
+	\end{highlights}
 \end{samepage}
 
 \begin{samepage}
-\section{Core Competencies}
-\vspace{0.1cm}
-
-\begin{highlights}
-\item \textbf{Problem Solving:} \problemSolving
-\item \textbf{Leadership:} \leadership
-\item \textbf{Communication:} \communication
-\item \textbf{Continuous Learning:} \continuousLearning
-\end{highlights}
+	\section{Core Competencies}
+	\vspace{0.1cm}
+	
+	\begin{highlights}
+		\item \textbf{Problem Solving:} \problemSolving
+		\item \textbf{Leadership:} \leadership
+		\item \textbf{Communication:} \communication
+		\item \textbf{Continuous Learning:} \continuousLearning
+	\end{highlights}
 \end{samepage}
 
 \end{document}

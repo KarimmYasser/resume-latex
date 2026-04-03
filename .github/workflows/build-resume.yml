@@ -31,12 +31,7 @@ jobs:
       matrix:
         theme:
           [
-            { name: "light", file: "resume.tex", output: "resume-light.pdf" },
-            {
-              name: "dark",
-              file: "resume-dark.tex",
-              output: "resume-dark.pdf",
-            },
+            { name: "light", file: "resume.tex", output: "resume-light.pdf" }
           ]
 
     steps:
@@ -114,12 +109,6 @@ jobs:
           name: resume-light-theme
           path: ./artifacts/
 
-      - name: 📥 Download Dark Theme PDF
-        uses: actions/download-artifact@v4
-        with:
-          name: resume-dark-theme
-          path: ./artifacts/
-
       - name: 🔍 List Downloaded Files
         run: |
           echo "📋 Files in artifacts directory:"
@@ -134,7 +123,6 @@ jobs:
 
           # Find and copy PDFs to release directory
           find ./artifacts/ -name "resume-light.pdf" -exec cp {} ./release-assets/resume-light.pdf \;
-          find ./artifacts/ -name "resume-dark.pdf" -exec cp {} ./release-assets/resume-dark.pdf \;
 
           # Verify files exist
           echo "📄 PDFs prepared for release:"
@@ -163,7 +151,7 @@ jobs:
         id: release_notes
         run: |
           # Generate simple release notes as a single line (avoid multi-line issues)
-          SIMPLE_NOTES="📄 Resume Update - $(date +'%B %d, %Y'). Includes Light Theme (ATS-optimized) and Dark Theme (digital portfolio) PDFs. Commit: ${{ github.sha }}"
+          SIMPLE_NOTES="📄 Resume Update - $(date +'%B %d, %Y'). Includes Light Theme (ATS-optimized). Commit: ${{ github.sha }}"
           echo "NOTES=$SIMPLE_NOTES" >> $GITHUB_OUTPUT
           echo "Generated release notes: $SIMPLE_NOTES"
 
@@ -177,7 +165,6 @@ jobs:
           prerelease: false
           files: |
             ./release-assets/resume-light.pdf
-            ./release-assets/resume-dark.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -262,7 +249,6 @@ jobs:
         run: |
           echo "🎉 Resume compilation successful!"
           echo "✅ Light theme PDF generated"
-          echo "✅ Dark theme PDF generated"
           echo "✅ All validations passed"
 
       - name: 📢 Build Failure Notification

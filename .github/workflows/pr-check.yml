@@ -23,8 +23,7 @@ jobs:
       matrix:
         theme:
           [
-            { name: "light", file: "resume.tex" },
-            { name: "dark", file: "resume-dark.tex" },
+            { name: "light", file: "resume.tex" }
           ]
 
     steps:

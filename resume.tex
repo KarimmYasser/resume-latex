@@ -333,19 +333,20 @@ leftmargin=10pt
 
 \begin{samepage}
 	\section{Technical Skills}
-	\vspace{0.1cm}
-	\begin{highlights}
-		\item \textbf{Programming Languages:} \programmingLanguages
-		\item \textbf{Mobile Development:} \mobileDevelopment
-		\item \textbf{Frameworks \& Libraries:} \frameworksLibraries
-		\item \textbf{Backend \& Database:} \backendDatabase
-		\item \textbf{Development Tools:} \developmentTools
-		\item \textbf{Software Engineering:} \softwareEngineering
-		\item \textbf{Data Science:} \dataScience
-		\item \textbf{Artificial Intelligence:} \artificialIntelligence
-		\item \textbf{Research Skills:} \researchSkills
-		\item \textbf{Specialized Skills:} \specializedSkills
-	\end{highlights}
+\vspace{0.1cm}
+\newcommand{\skillItem}[2]{\ifdefempty{#2}{}{\item \textbf{#1:} #2}}
+\begin{highlights}
+	\skillItem{Programming Languages}{\programmingLanguages}
+	\skillItem{Mobile Development}{\mobileDevelopment}
+	\skillItem{Frameworks \& Libraries}{\frameworksLibraries}
+	\skillItem{Backend \& Database}{\backendDatabase}
+	\skillItem{Development Tools}{\developmentTools}
+	\skillItem{Software Engineering}{\softwareEngineering}
+	\skillItem{Data Science}{\dataScience}
+	\skillItem{Artificial Intelligence}{\artificialIntelligence}
+	\skillItem{Research Skills}{\researchSkills}
+	\skillItem{Specialized Skills}{\specializedSkills}
+\end{highlights}
 \end{samepage}
 
 % \begin{samepage}

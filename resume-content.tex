@@ -140,6 +140,26 @@
 
 \newcommand{\projectsList}{%
     {Mar 2026}%
+    {https://github.com/KarimmYasser/hash-clash-keys-please}%
+    {Cryptographic Research: Multi-Architecture Hash Competition}%
+    {Evaluated \textbf{10 distinct cryptographic hash architectures} (BLAKE, Keccak, Skein, etc.) to analyze the trade-off between \textbf{diffusion speed} and \textbf{structural integrity}. Developed a \textbf{custom "Hidden Security" test suite} to simulate advanced cryptanalysis, identifying and patching vulnerabilities to \textbf{Length-Extension Attacks (LEA)} and short-message bias. Engineered a high-performance \textbf{BLAKE-256} implementation from scratch using \textbf{ARX primitives} and \textbf{manual loop unrolling}, achieving a near-perfect \textbf{0.9998 security score}. Verified compliance with the \textbf{Strict Avalanche Criterion (SAC)} via automated hyperparameter tuning of rotation constants.}%
+    |||
+    {Apr 2026 - May 2026}%
+    {https://github.com/KarimmYasser/robot-wall-follower}%
+    {Autonomous Wall-Following Robot (Sim-to-Real Development)}%
+    {Engineered a robust robotics system transitioning from \textbf{Webots} simulation to hardware. Designed an interrupt-driven \textbf{Embedded C} architecture for \textbf{ATmega328P} utilizing \textbf{Timer1} and \textbf{EXTI/PCINT} interrupts for concurrent, non-blocking distance sensing. Developed a \textbf{Cascaded PID Controller} nesting a wall-distance loop within an inner \textbf{IMU-based} heading loop for fluid navigation. Implemented a \textbf{Finite State Machine (FSM)} for autonomous decision-making and utilized \textbf{First-order Lag Filters} for sensor signal smoothing and glitch rejection.}%
+    |||
+    {Mar 2026 - May 2026}%
+    {https://github.com/KarimmYasser/aladdin-nasiras-revenge}%
+    {Aladdin: Nasira's Revenge - C++ Game Engine}%
+    {Developed a high-performance 3D engine using \textbf{C++17} and \textbf{OpenGL 3.3} featuring a data-driven \textbf{Entity Component System (ECS)} with deferred lifecycle management for memory stability. Engineered a \textbf{command-based renderer} with \textbf{16k shadow mapping} and GPU-accelerated vertex skinning. Built a \textbf{miniaudio}-based system with disk-streamed BGM and integrated \textbf{FFmpeg} for real-time video streaming. Optimized world geometry via \textbf{Greedy Rectangular Merging} and implemented reactive \textbf{Finite State Machine (FSM)} AI for autonomous enemy behavior.}%
+    |||
+    {Mar 2026 - May 2026}%
+    {https://github.com/KarimmYasser/machine-sound-classification}%
+    {Industrial Machine Sound Classification \& Anomaly Detection}%
+    {Architected a \textbf{Dual-Track AI pipeline} for predictive maintenance of \textbf{pumps, fans, and motors} (56k recordings). Developed an \textbf{XGBoost edge champion} (<10ms latency) and \textbf{EfficientAT} (EfficientNet + Transformer) for cloud diagnostics, achieving \textbf{95.61\% accuracy}. Engineered a high-performance \textbf{Rust engine} using \textbf{PyO3} and \textbf{Rayon}, achieving a \textbf{57x speedup} in feature extraction. Resolved severe data imbalance using \textbf{Conditional GANs (CGAN)} and eliminated session leakage through \textbf{DBSCAN Cluster-Aware splitting}. Deployed via \textbf{Docker} and \textbf{Hugging Face}.}%
+    |||
+    {Mar 2026}%
     {https://github.com/KarimmYasser/sql-station-logistics-chatbot}%
     {Space Station Supply Agent (ODC AI Training)}%
     {Built a \textbf{LangGraph}-based conversational AI agent translating natural language into \textbf{SQLite} queries. Engineered an autonomous error recovery system with a self-healing loop and applied hallucination detection guards over token-optimized schemas.}%
@@ -357,6 +377,12 @@ NumPy,
 Streamlit,
 Selenium,
 FastAPI,
+OpenGL,
+ReactPhysics3D,
+Assimp,
+FFmpeg,
+miniaudio,
+ATmega328P (AVR),
 Tkinter
 }
 
@@ -395,6 +421,10 @@ State Management,
 Object-Oriented Programming (OOP),
 Design Patterns,
 CRUD Applications,
+Entity Component System (ECS),
+Finite State Machines (FSM),
+Cascaded PID Control,
+Memory Stability & Lifecycle Management,
 ML Pipelines
 }
 
@@ -413,8 +443,9 @@ Deep Learning (CNNs),
 3D Medical Image Segmentation,
 Random Forest,
 Support Vector Machines (SVM),
-Clustering Algorithms,
+Clustering (DBSCAN, HDBSCAN),
 Hyperparameter Tuning,
+Cryptography (ARX, LEA Resistance, SAC/BIC),
 Constraint Satisfaction
 }
 
@@ -433,7 +464,14 @@ Systems Programming (Process Management, IPC),
 Algorithms,
 Data Structures,
 Microprocessors,
-FPGA
+FPGA,
+Embedded C (Bare-Metal, Register-Level Drivers),
+Robot Simulation (Webots),
+Hash Function Design (BLAKE, Keccak, Skein),
+Game Engine Architecture,
+Computer Graphics,
+Video Decoding (FFmpeg),
+Audio Engineering
 }
 
 

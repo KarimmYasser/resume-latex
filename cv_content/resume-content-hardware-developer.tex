@@ -16,7 +16,7 @@
 
 % SUMMARY
 \newcommand{\mySummary}{%
-\textbf{Hardware Developer} and Computer Engineering student with hands-on experience in VLSI design, FPGA development, and processor architecture. Proficient in \textbf{Verilog}, \textbf{VHDL}, and hardware description languages with projects spanning CNN accelerators, pipelined processors, and encryption systems. Strong foundation in digital design, computer architecture, and hardware-software co-design. Experience implementing optimized datapaths, systolic arrays, and pipeline hazard handling. Passionate about AI hardware acceleration and high-performance computing.
+\textbf{Hardware \& Embedded Systems Engineer} with practical experience in FPGA design, bare-metal C programming, and microprocessor architectures. Highly proficient in \textbf{Verilog}, \textbf{VHDL}, and \textbf{C/C++}. Experienced in designing custom hardware accelerators, complex pipelined processors, and developing robust embedded firmware for autonomous systems. Strong foundation in VLSI design flow, RTL-to-GDSII logic synthesis, and real-time control system implementation.
 }
 
 % EDUCATION
@@ -27,166 +27,81 @@
 
 % WORK EXPERIENCE
 \newcommand{\experienceList}{%
-    {Mobile Development Intern (Flutter \& ML)}%
-    {Informatique}%
-    {Jul 2025 - Aug 2025}%
+    {Session Lead}%
+    {Udacity (Digital Egypt Cubs Initiative - DECI)}%
+    {Nov 2025 - Mar 2026}%
     {%
-        \item Integrated on-device ML models using TFLite/ML Kit, gaining experience in edge computing optimization.
+        \item Led weekly sessions delivering core computer fundamentals, focusing heavily on system architecture, memory hierarchies, and digital logic design principles.
+        \item Mentored students through practical exercises demonstrating the interaction between low-level software and physical hardware.
+    }%
+    |||
+    {Resource Management Team Member}%
+    {Enactus Cairo University}%
+    {Dec 2025 - Feb 2026}%
+    {%
+        \item Supported rigorous planning and resource allocation for hardware-oriented engineering projects and physical prototypes.
+        \item Validated technical feasibility of proposed hardware systems through structured ideation methodologies.
     }%
     |||
     {Software Developer}%
     {I'SUPPLY}%
-    {Jul 2025 - Present}%
+    {Jul 2025 - Dec 2025}%
     {%
-        \item Won first place in a 30+ team hackathon, earning a full-time position offer.
-        \item Applied software engineering principles relevant to hardware-software integration.
-    }%
-    |||
-    {Data Science Trainee}%
-    {Digital Egypt Pioneers Initiative (DEPI)}%
-    {Jun 2025 - Dec 2025}%
-    {%
-        \item Studied neural network architectures applicable to hardware acceleration design.
+        \item Gained extensive experience in system-level architecture and performance optimization, translating high-level requirements into scalable designs.
     }%
     |||%
 }
 
 % PROJECTS
 \newcommand{\projectsList}{%
+    {Apr 2026 - May 2026}%
+    {https://github.com/KarimmYasser/robot-wall-follower}%
+    {Autonomous Wall-Following Robot (Sim-to-Real)}%
+    {Engineered highly-optimized bare-metal \textbf{C} firmware for the \textbf{ATmega328P} utilizing \textbf{Timer1} and \textbf{EXTI/PCINT} interrupts. Designed a \textbf{Cascaded PID Controller} nesting wall-distance within an IMU heading loop for exact 90° pivots and integrated Bluetooth telemetry.}%
+    |||
     {Nov 2025 - Dec 2025}%
     {https://github.com/KarimmYasser/VLSI-Convolution-Systolic-Accelerator}%
     {VLSI Convolution Systolic Accelerator}%
-    {Designed a \textbf{CNN accelerator} in \textbf{Verilog} using \textbf{systolic arrays} for optimized matrix operations and neural network inference.}%
+    {Designed a high-performance 2D convolution accelerator in \textbf{Verilog} using an 8x8 systolic array targeting the \textbf{SKY130 PDK}. Successfully executed the complete \textbf{RTL-to-GDSII} flow via \textbf{OpenLane}.}%
     |||
-    {Mar 2024 - May 2024}%
+    {Oct 2025 - Dec 2025}%
     {https://github.com/KarimmYasser/stall_3alda2ery}%
-    {5-Stage Pipelined MIPS Processor}%
-    {Designed a complete \textbf{32-bit MIPS processor} with \textbf{pipeline architecture}, \textbf{hazard detection}, and \textbf{forwarding unit} in Verilog.}%
+    {5-Stage Pipelined Processor}%
+    {Designed a complete 32-bit 5-stage pipelined MIPS processor in \textbf{VHDL} supporting hardware interrupts and mapped I/O. Implemented robust hazard handling via data forwarding and built a custom Python assembler.}%
     |||
     {Feb 2024 – Apr 2024}%
     {https://github.com/KarimmYasser/AES}%
-    {FPGA AES-128 Encryption System}%
-    {Implemented \textbf{AES-128 encryption} on FPGA using \textbf{VHDL} with optimized \textbf{datapath} and control unit design.}%
+    {AES Encryption – FPGA Implementation}%
+    {Redesigned the AES-128/192/256 algorithm in \textbf{Verilog} for FPGA deployment, achieving \textbf{40\% faster encryption} throughput using advanced pipelining and hardware parallelism.}%
     |||
-    {Mar 2025 – May 2025}%
-    {https://github.com/KarimmYasser/kernel-sim-ohh-s}%
-    {Operating System Scheduler}%
-    {Developed scheduler implementing CPU scheduling algorithms relevant to \textbf{hardware resource management}.}%
+    {Dec 2025}%
+    {https://github.com/KarimmYasser/FM_Stereo_System}%
+    {FM Stereo Broadcasting System Simulation}%
+    {Implemented a software-defined FM Stereo Transmitter and Receiver, conducting experimental analysis on frequency deviation, noise immunity, and system robustness in noisy channel environments.}%
     |||
     {Feb 2025}%
     {https://github.com/KarimmYasser/cmpsh}%
-    {Unix Shell Implementation}%
-    {Built shell in C demonstrating understanding of \textbf{hardware-software interface} and system calls.}%
-    |||
-    {Feb 2024 – Apr 2024}%
-    {https://github.com/KarimmYasser/Alien_Invasion_Project}%
-    {Alien Invasion Game - C++}%
-    {Applied efficient \textbf{data structures} and \textbf{memory management} principles in game development.}%
+    {Unix Shell - System Architecture}%
+    {Implemented a Unix shell in C utilizing direct system calls, demonstrating deep understanding of OS process execution, interrupts, and I/O handling.}%
     |||%
 }
 
 % TECHNICAL SKILLS
-\newcommand{\programmingLanguages}{
-\textbf{Verilog},
-\textbf{VHDL},
-C,
-C++,
-Python,
-Assembly (MIPS)
-}
-
-\newcommand{\mobileDevelopment}{
-Edge Computing,
-On-device ML,
-TFLite
-}
-
-\newcommand{\frameworksLibraries}{
-Xilinx Vivado,
-ModelSim,
-Quartus,
-GHDL,
-GTKWave
-}
-
-\newcommand{\backendDatabase}{
-Memory Architecture,
-Cache Design,
-Storage Systems
-}
-
-\newcommand{\developmentTools}{
-Git,
-GitHub,
-Linux,
-Make,
-TCL Scripting,
-VS Code
-}
-
-\newcommand{\softwareEngineering}{
-RTL Design,
-Synthesis,
-Timing Analysis,
-Place \& Route,
-Verification
-}
-
-\newcommand{\dataScience}{
-Algorithm Optimization,
-Neural Network Architecture
-}
-
-\newcommand{\artificialIntelligence}{
-\textbf{AI Hardware Acceleration},
-CNN Accelerators,
-Systolic Arrays,
-Matrix Operations,
-Quantization
-}
-
-\newcommand{\researchSkills}{
-Technical Documentation,
-Hardware Testing,
-Performance Analysis
-}
-
-\newcommand{\specializedSkills}{
-\textbf{VLSI Design},
-\textbf{FPGA Development},
-\textbf{Computer Architecture},
-\textbf{Pipeline Design},
-\textbf{Hazard Handling},
-Digital Design,
-Hardware-Software Co-design,
-Cryptographic Hardware,
-High-Performance Computing
-}
+\newcommand{\programmingLanguages}{C, C++, Assembly, Python, MATLAB}
+\newcommand{\mobileDevelopment}{}
+\newcommand{\frameworksLibraries}{OpenLane, Yosys, Magic, GTKWave}
+\newcommand{\backendDatabase}{}
+\newcommand{\developmentTools}{ModelSim, Quartus, Vivado, Proteus, Webots, Make}
+\newcommand{\softwareEngineering}{VLSI Design, RTL-to-GDSII, Pipelining, Hazard Handling}
+\newcommand{\dataScience}{}
+\newcommand{\artificialIntelligence}{}
+\newcommand{\researchSkills}{}
+\newcommand{\specializedSkills}{Hardware Accelerators, Systolic Arrays, Power/Timing Analysis}
 
 % CORE COMPETENCIES
-\newcommand{\problemSolving}{
-Hardware optimization,
-Timing closure,
-Resource utilization,
-Debug \& verification
-}
-
-\newcommand{\leadership}{
-Technical collaboration,
-Design review,
-Documentation
-}
-
-\newcommand{\communication}{
-Technical specifications,
-Design documentation,
-Knowledge transfer
-}
-
-\newcommand{\continuousLearning}{
-ASIC design,
-Advanced architectures,
-Emerging technologies
-}
-
+\newcommand{\problemSolving}{Hardware debugging, Timing analysis, Power/Area optimization}
+\newcommand{\leadership}{Technical collaboration, Project planning}
+\newcommand{\communication}{Hardware documentation, Design presentations}
+\newcommand{\continuousLearning}{Adopting new PDKs, Architecture exploration, Reading datasheets}
 % ============================================================
+

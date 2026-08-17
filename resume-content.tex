@@ -43,22 +43,41 @@
 % ============================================================
 
 \newcommand{\experienceList}{%
+    {AI Research Intern}%
+    {Nile University (SESC Research Center)}%
+    {Jul 2026 - Aug 2026}%
+    {%
+        \item Engineered an autonomous \textbf{Multi-Agent AI Pipeline} translating natural language simulation descriptions into validated \textbf{OpenFOAM} CFD cases using local LLMs (\textbf{Ollama/vLLM}) on air-gapped Linux infrastructure; conducted a \textbf{40-paper literature review} benchmarking prior SOTA systems (Foam-Agent, ChatCFD).
+        \item Architected a \textbf{Structured Intermediate Representation (IR)} and \textbf{Deterministic C++ Renderer} ("reason free, constrain late" paradigm) across 18 solver families, eliminating cross-file naming drift and syntax hallucinations typical of raw LLM generation.
+        \item Designed a stateful \textbf{LangGraph self-correction workflow} with failure routing across a formal taxonomy (\texttt{DICTIONARY\_SYNTAX}, \texttt{MESH\_QUALITY}, \texttt{SOLVER\_RUNTIME}), targeted AST file-patching, and verifiable evidence-backed \textbf{Safe Exit} protocols with anti-laziness guardrails.
+        \item Implemented a \textbf{3-Level Preflight Gate} (static dictionary audit, checkMesh metrics, residual log-slope convergence prediction) and a containerized \textbf{Docker validation ladder} with parallel Scotch decomposition (\textbf{MPI}), early NaN aborts, and solver iteration bounding (\textbf{15x speedup} on 5M+ cell meshes).
+        \item Built a semantic case-family taxonomy with chunkless RAG across 252 tutorials, a physical-envelope constraint layer clamping LLM parameters to verified thermodynamic bounds, and an $O(1)$-memory boundary parser handling massive meshes (\textbf{10.6M+ cells}).
+    }%
+    |||
     {Software Engineer Intern}%
     {Siemens Digital Industries Software}%
     {Jul 2026 - Aug 2026}%
     {%
-        \item Selected for Siemens' Strategic Student Program to join the CIC Environment QA team, focusing on \textbf{agentic AI development} to enhance the QA workflow for \textbf{Solido Design Environment}, a market-leading analog/mixed-signal EDA solution.
-        \item Applying \textbf{AI/LLM-driven techniques} to support test plan definition, defect diagnosis, and \textbf{FURPS} quality validation, with emphasis on automating and augmenting GUI/usability testing.
-        \item Working with \textbf{Python} and modern AI agent frameworks to prototype intelligent tooling that assists the QA team's regression prevention and release quality processes.
+        \item Re-architected the database-generation and ingestion pipeline for the \textbf{Commit-Based Analysis Tool (CAT)}, a Test Impact Analysis (\textbf{TIA}) and Regression Test Selection (\textbf{RTS}) platform used to select affected test suites across \textbf{3,200+ test suites} and \textbf{20M+ coverage rows} for the \textbf{Solido Design Environment} (analog/mixed-signal EDA).
+        \item Slashed end-to-end database creation time from \textbf{23.6 hours to ~30 minutes} (\textbf{~47x speedup} / 97.9\% runtime reduction) by eliminating intermediate JSON serialization/re-reading and building a high-throughput \textbf{native SQLite coverage reader} (\texttt{NativeCoverageWorkerPool}).
+        \item Solved catastrophic \textbf{45.7 GB OOM crashes} during full-scale 21 GB corpus ingestion by engineering a multiprocessing worker pool with bounded queue backpressure and memory-shrink optimizations, reducing per-worker RSS from 1,613 MB to 378 MB (\textbf{4.3x memory reduction}) and stabilizing peak memory at 33.8 GB.
+        \item Designed a lock-free, filesystem \textbf{persistent content-addressed AST parse cache} (keyed by source SHA-256 and namespaced by Python/coverage environments), eliminating redundant AST statement/branch re-parsing across workers and CI runs to achieve near-zero repeat parse latency.
+        \item Architected an \textbf{incremental coverage ingestion} engine with Copy-on-Write (COW) database snapshots, RTS-safe per-test atomic row replacement (\texttt{DELETE ... WHERE test\_case\_id}), \textbf{SHA-256 manifest gating} (skipping unchanged test suites in \textbf{0.05s}), and commit-tracked publish gates (\texttt{db\_meta.head\_commit}) to prevent silent merge stalls.
+        \item Derived the mathematical crossover point ($f^* = 0.087 \implies \mathbf{10\%}$) for \textbf{Size-Adaptive Dispatch}, dynamically routing ingest between online per-test replacement (25–30x faster on small merges, ~4s) and batched index-dropped load to prevent quadratic degradation on large merges.
+        \item Optimized database architecture and query throughput: eliminated $N+1$ single-function lookup bottlenecks via batched chunked queries, engineered \textbf{covering indexes} to accelerate read queries by up to \textbf{4.8x}, and built an append-only schema migration framework (\texttt{PRAGMA user\_version}, v0 $\to$ v7).
+        \item Researched \textbf{Branch-Arc Signatures} to resolve high-fan-in utility over-selection (e.g. \texttt{getLogger} selecting 3,146 tests): clustered execution equivalence classes from intra-function branch graphs, proving a \textbf{690x reduction} in impacted test selections (from 6.88M selections to 9,981 distinct arc groups across 2,490 explosive functions) without sacrificing fault detection.
+        \item Led the \textbf{CAT 3 cutover}: transitioned the system to a streamlined, membership-gated native coverage engine, completely deprecating and removing legacy JSON streaming paths (\texttt{ijson}, \texttt{JsonStreamParser}, \texttt{CoverageJsonConverter}).
     }%
     |||
     {Backend Development Intern (DCX)}%
     {Ejada Systems}%
-    {Jul 2026 - Aug 2026}%
+    {Jul 2026}%
     {%
-        \item Selected for the Digital Customer Experience (DCX) Internship Program to gain end-to-end exposure to the digital product lifecycle, focusing on backend architecture and software solutions.
-        \item Designed and developed scalable \textbf{RESTful Web Services} using \textbf{Spring Boot} through intensive technical training and hands-on projects.
-        \item Collaborated with mentors and cross-functional teams to understand how enterprise-grade digital products are designed, developed, and delivered to enhance customer experiences.
+        \item Architected a production-grade \textbf{Distributed E-Commerce Microservices Platform} comprising 6 deployable services using \textbf{Spring Boot 3}, \textbf{Spring Cloud (2025)}, and a strict \textbf{database-per-service} architecture (\texttt{inventory\_db}, \texttt{wallet\_db}, \texttt{shop\_db}) to ensure full domain isolation.
+        \item Implemented a synchronous \textbf{Distributed Checkout Saga} with automated \textbf{compensating transactions} across \texttt{shop-service}, \texttt{inventory-service} (stock reservation), and \texttt{wallet-service} (idempotent ledger debit), guaranteeing data consistency across partial failures.
+        \item Built a perimeter-level \textbf{Stateless JWT Security Architecture} with \texttt{wallet-service} as Identity Provider (IdP) and \texttt{api-gateway} performing edge token validation and \texttt{X-User-Id}/\texttt{X-User-Roles} header injection, shielding internal RPC endpoints from public exposure.
+        \item Engineered fault-tolerant inter-service communication using \textbf{OpenFeign} and \textbf{Resilience4j} (\texttt{@CircuitBreaker}, \texttt{@Retry}, \texttt{@TimeLimiter}), segregating business domain errors (409 Out of Stock, 402 Insufficient Funds) from network faults to prevent cascade circuit trips.
+        \item Configured centralized cloud infrastructure with \textbf{Spring Cloud Config Server} (zero-committed secrets), \textbf{Netflix Eureka} service discovery, and a full-spectrum testing suite using \textbf{Testcontainers} (real MySQL) and \textbf{WireMock}.
     }%
     |||
     {Agentic AI Trainee}%
@@ -152,15 +171,49 @@
 % To ADD a new project: Copy a block (4 lines between |||) and paste at the end
 % To EDIT a project: Change the text between { }
 % To REMOVE a project: Delete the entire block (4 lines between |||)
-% Format: {Date}{GitHub/Demo Link}{Project Title}{Description}
+% Format: {Date}{Link}{Project Title}{Description}
+% Link options:
+%   {}                                   -> No link (displays Date only)
+%   {https://github.com/user/repo}       -> Displays "Date | GitHub"
+%   {https://example.com|Custom Label}   -> Displays "Date | Custom Label" (e.g. {https://arxiv.org/abs/...|Paper}, {https://demo.com|Demo})
 % Separate each project with |||
 % ============================================================
 
 \newcommand{\projectsList}{%
+    {Jul 2026 - Aug 2026}%
+    {}%
+    {Commit-Based Analysis Tool (CAT) - 47x Test Impact Analysis Optimization}%
+    {Engineered an end-to-end performance and architectural overhaul of the \textbf{Commit-Based Analysis Tool (CAT)}, a Regression Test Selection (\textbf{RTS}) system for Siemens EDA's \textbf{Solido Design Environment} (3,200+ test suites, 20M+ rows). Slashed database generation time from \textbf{23.6 hours to ~30 minutes} (\textbf{~47x speedup}) by eliminating intermediate JSON serialization and developing a high-throughput \textbf{native SQLite coverage engine}. Engineered a multiprocessing worker pool with bounded queue backpressure (resolving \textbf{45.7 GB OOM crashes}), a lock-free \textbf{persistent content-addressed AST parse cache} (SHA-256 keyed, 4.3x RAM reduction), and an \textbf{incremental Copy-on-Write ingestion} pipeline with SHA-256 manifest gating (\textbf{0.05s} unchanged runs). Optimized the SQLite database layer with \textbf{covering indexes} and batched queries (4.8x faster reads), formulated \textbf{Size-Adaptive Dispatch} ($f^*=10\%$), and researched \textbf{Branch-Arc Signatures} to collapse explosive high-fan-in test selections by \textbf{690x} across 2,490 utility functions.}%
+    |||
+    {Jul 2026 - Aug 2026}%
+    {https://github.com/KarimmYasser/NU-research-intern}%
+    {Autonomous Agentic CFD Pipeline (OpenFOAM Multi-Agent System)}%
+    {Architected an autonomous \textbf{Multi-Agent AI Pipeline} translating natural language simulation prompts into verified, runnable \textbf{OpenFOAM} CFD cases using local LLMs (\textbf{Ollama/vLLM}) on isolated infrastructure. Built a \textbf{Structured IR + Deterministic Renderer} engine across 18 solver families to eliminate C++ dictionary syntax errors. Developed a \textbf{LangGraph state graph} featuring an automated self-correction loop, targeted file-patching LLM nodes, and an evidence-backed \textbf{Safe Exit protocol} with anti-laziness filters. Implemented a \textbf{3-Level Preflight Gate} (static dictionary auditing, checkMesh metric evaluation, and residual log-slope convergence predictor) coupled with a \textbf{Docker validation ladder} supporting parallel Scotch decomposition (\textbf{MPI}), linear solver iteration bounding (\textbf{15x speedup}), and early NaN aborts on massive meshes (\textbf{10.6M+ cells}). Developed 200+ unit/integration tests and packaged a one-command air-gapped deployment bundle.}%
+    |||
+    {Jul 2026}%
+    {https://github.com/KarimmYasser/ecommerce-microservices-platform}%
+    {Distributed E-Commerce Microservices Platform (Spring Cloud)}%
+    {Architected a production-grade distributed microservices backend with \textbf{Spring Boot 3} and \textbf{Spring Cloud (2025)} across 6 deployables. Implemented a strict \textbf{database-per-service} architecture (MySQL), a synchronous \textbf{Distributed Checkout Saga} with automated compensation logic, and perimeter \textbf{JWT stateless security} via \textbf{Spring Cloud Gateway}. Engineered fault-tolerant inter-service RPCs with \textbf{OpenFeign} and \textbf{Resilience4j} (Circuit Breakers, Retries, Time Limiters), centralized configuration via \textbf{Spring Cloud Config Server}, and service discovery with \textbf{Netflix Eureka}. Comprehensive test coverage via \textbf{Testcontainers} and \textbf{WireMock}.}%
+    |||
+    {Jun 2026 - Jul 2026}%
+    {}%
+    {QA Copilot (guardband) - Multi-Agent Test Intelligence Platform}%
+    {Architected a multi-agent QA test intelligence copilot for variation-aware IC design verification software (\textbf{Siemens Solido Design Environment}). Designed 4 specialized Claude/Gemini/Groq agents: \textbf{SpecAnalyzer} (FURPS+ requirement tagging), \textbf{TestGenerator} (happy/boundary/negative/adversarial synthesis), \textbf{RiskPrioritizer} (impact $\times$ likelihood P0--P3 risk scoring), and \textbf{LogTriage} (root-causing massive Monte Carlo, PVT corner, and High-Sigma HSMC regression logs into \texttt{REGRESSION}, \texttt{FLAKY}, \texttt{ENVIRONMENT}, and \texttt{NEEDS\_HUMAN} verdicts with cited evidence). Built a full-stack platform with \textbf{FastAPI}, an interactive \textbf{React/Vite} dashboard, and one-command \textbf{Docker Compose} deployment.}%
+    |||
+    {Jun 2026 - Jul 2026}%
+    {}%
+    {WASAF - Waveform-Aware Semantic Analysis Framework for Analog EDA}%
+    {Architected an open-source 4-layer semantic analysis framework for analog circuit simulation waveforms (RAW, PSF) bridging SPICE simulators (\textbf{Cadence Spectre, Eldo/AFS, ngspice}) with grounded AI reasoning. Built \textbf{L1 IO} parser adapters (\texttt{spicelib}, \texttt{psf-parser}) into a multidimensional \texttt{WaveformDataset} handling corner/Monte Carlo sweeps; engineered \textbf{L2 DSP Feature Extractors} (step responses, settling time, damping ratio $\zeta$, phase margin, slew rate, THD) with confidence scores; designed \textbf{L3 Kleene 3-valued logic} rule engine with YAML knowledge bases; and created \textbf{L4 LLM reasoning} with structured anti-hallucination serialization. Enforced spec-first design with 187+ unit/property tests.}%
+    |||
     {Jun 2026}%
     {https://github.com/KarimmYasser/GSoCPathfinder}%
     {GSoC Pathfinder - AI Agent Organization Matcher}%
     {Built an end-to-end \textbf{AI Agent} system that matches candidate profiles to \textbf{Google Summer of Code} organizations using a \textbf{LangGraph} agentic pipeline. Ingested and canonicalized \textbf{11 years} of GSoC data (663 organizations, 12k+ projects) into a \textbf{dual-database} store: \textbf{Neo4j} for temporal knowledge graph queries and \textbf{Qdrant} for semantic vector search. Engineered a \textbf{high-performance Rust scoring engine} (PyO3/Maturin) implementing a \textbf{7-Factor weighted ranking} (Skill Overlap, Semantic Similarity, Recency, Topic Alignment, Project Volume, Org Stability, LLM Relevance) with CV-frequency-weighted Jaccard similarity. Exposed endpoints via \textbf{FastAPI} and built an interactive \textbf{React/Vite} dashboard featuring a 2D force-directed \textbf{Knowledge Graph Visualizer}, CV gap analysis \& learning roadmap optimizer, proposal draft generator, and a draggable chat assistant.}%
+    |||
+    {May 2026 - Jun 2026}%
+    {}%
+    {Wavelength - Automated 3-Stage arXiv Research Discovery Pipeline}%
+    {Engineered an automated research intelligence pipeline discovering and evaluating cutting-edge computer science papers from arXiv. Built \textbf{Stage 1 Scraper} with deduplication, priority category filtering (\texttt{cs.AI}, \texttt{cs.LG}, \texttt{cs.SE}, \texttt{cs.CR}), and SQLite WAL persistence; developed \textbf{Stage 2 First Review} executing batch LLM evaluations across 7 scoring dimensions (novelty, feasibility, recruiter impact, industry relevance, composite); and built \textbf{Stage 3 Second Review} implementing strict quality control to eliminate category inflation, detect reproduction vs genuine novelty, and generate structured research roadmaps (\texttt{ideas.md}, \texttt{trends.md}).}%
     |||
     {Apr 2026 - May 2026}%
     {https://github.com/KarimmYasser/robot-wall-follower}%
@@ -188,7 +241,7 @@
     {Engineered a research-driven evaluation platform for \textbf{Multimodal AI} (Text, Image, Audio) and \textbf{Agentic Workflows} following a deep literature review of \textbf{MUSE}, \textbf{TopoBench}, and \textbf{BEHELM} frameworks. Implemented a \textbf{Five-Level Quality Taxonomy} and \textbf{Dual-Metric Framework} (Hard/Soft Scores) to analyze model fidelity beyond binary pass/fail metrics. Developed an \textbf{Agent Trace Viewer} for multi-turn loops, enabling granular \textbf{credit assignment} across reasoning and tool-calling steps. Built a high-performance \textbf{FastAPI} orchestrator with \textbf{SSE streaming} for real-time monitoring and integrated \textbf{lm-evaluation-harness} wrappers into a native \textbf{Flutter} dashboard.}%
     |||
     {Mar 2026 - Apr 2026}%
-    {https://doi.org/10.1109/TDSC.2024.3524626}%
+    {}%
     {Research Initiative: Quantum Foundations \& Post-Quantum Security}%
     {Conducted extensive theoretical research into \textbf{Quantum Computing foundations} (superposition, entanglement, Shor's and Grover's algorithms) to analyze the systemic threat to classical asymmetric cryptography. Investigated the mathematical structures of \textbf{Post-Quantum Cryptography (PQC)}, specifically \textbf{Code-Based} and \textbf{Lattice-Based} schemes. Evaluated constant-time encoding techniques for constant Hamming weight vectors, analyzing their role in mitigating \textbf{Side-Channel (Timing) Attacks} in a quantum-adversarial landscape.}%
     |||
@@ -366,6 +419,15 @@ React Native (Expo)
 }
 
 \newcommand{\frameworksLibraries}{
+Spring Boot 3,
+Spring Cloud (Gateway, Eureka, Config, OpenFeign),
+Spring Security 6,
+Resilience4j,
+Testcontainers,
+WireMock,
+LangGraph,
+LangChain,
+Pydantic,
 Flutter Bloc,
 Riverpod,
 Provider,
@@ -404,7 +466,10 @@ Tkinter
 Supabase,
 Firebase,
 MySQL,
-SQLite,
+SQLite Performance Tuning (WAL Mode),
+Covering Indexes \& Query Optimization,
+Schema Versioning \& Migrations (PRAGMA user\_version),
+High-Throughput Bulk Ingest,
 Room,
 Database Design,
 Offline-first Architecture,
@@ -415,6 +480,10 @@ API Integration
 Git,
 GitHub,
 Docker,
+Ollama,
+vLLM,
+Linux (Ubuntu),
+Pytest,
 Jupyter Notebooks,
 VS Code,
 Android Studio,
@@ -430,6 +499,25 @@ Agile/Scrum
 \newcommand{\softwareEngineering}{
 Clean Architecture,
 SOLID Principles,
+Spec-First Architecture,
+FURPS+ Requirements Engineering,
+Log Triage \& Flakiness Detection,
+Digital Signal Processing (DSP) for EDA,
+Distributed Saga Pattern \& Compensating Transactions,
+Database-per-Service Architecture,
+Circuit Breaker Pattern,
+API Gateway Pattern \& Perimeter Security,
+Test Impact Analysis (TIA) / RTS,
+Performance Profiling \& Bottleneck Optimization,
+Multiprocessing Worker Pools \& Backpressure,
+Content-Addressed Caching,
+Copy-on-Write (COW) Data Pipelines,
+Size-Adaptive Dispatch Algorithms,
+Multi-Agent System Architecture,
+Structured Intermediate Representation (IR),
+Deterministic Rendering,
+Self-Healing / Self-Correction Loops,
+Fail-Fast Preflight Auditing,
 Dependency Injection,
 State Management,
 Object-Oriented Programming (OOP),
@@ -455,6 +543,15 @@ NLP Metrics (BLEU, ROUGE, WER, CER)
 }
 
 \newcommand{\artificialIntelligence}{
+Autonomous Multi-Agent Pipelines,
+Multi-Model Agent Orchestration (Claude, Gemini, Groq),
+Local LLM Deployment (Ollama/vLLM),
+Agentic Self-Correction Loops,
+Multi-Stage LLM Evaluation \& Rubric Scoring,
+Kleene 3-Valued Logic Rule Engines,
+Chunkless RAG \& Semantic Taxonomies,
+Physical-Envelope Constraint Layers,
+Verifiable Evidence \& Safe Exit Protocols,
 Supervised Learning,
 Unsupervised Learning,
 Deep Learning (CNNs),
@@ -472,6 +569,13 @@ LLM-as-a-Judge
 }
 
 \newcommand{\researchSkills}{
+Regression Test Selection (RTS) Research,
+Branch-Arc Execution Signatures,
+Mutation-Score Retention Analysis,
+Agentic Verification \& Safety Protocols,
+RLVR \& Self-Evolving Curricula (SEC),
+40-Paper SOTA Review (LLM+CFD Systems),
+Systematic Benchmarking,
 Survey Design,
 Problem Validation,
 Market Research,
@@ -481,6 +585,13 @@ Literature Review
 }
 
 \newcommand{\specializedSkills}{
+Analog Waveform Parsing (PSF/RAW/SPICE),
+Variation-Aware IC Verification (PVT Corners, High-Sigma Monte Carlo),
+EDA Software QA Automation,
+Simulation Pipeline Automation (OpenFOAM C++ Case Generation),
+Static Dictionary Auditing \& Parsing,
+Convergence Prediction (Residual Log-Slope Regression),
+Parallel Process Orchestration (MPI / Container Isolation),
 Operating Systems,
 Systems Programming (Process Management, IPC),
 Algorithms,

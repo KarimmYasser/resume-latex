@@ -292,11 +292,27 @@ leftmargin=10pt
 \section{Projects}
 \vspace{0.10 cm}
 
+% Project link parser: supports empty {}, url, or url|CustomLabel
+\def\splitProjectLink#1|#2|#3\relax{%
+	\ifblank{#2}{%
+		\hrefWithoutArrow{#1}{GitHub}%
+	}{%
+		\hrefWithoutArrow{#1}{#2}%
+	}%
+}
+\newcommand{\formatProjectHeader}[2]{%
+	\ifblank{#2}{%
+		\mbox{#1}%
+	}{%
+		\mbox{#1 | \splitProjectLink#2||\relax}%
+	}%
+}
+
 % Loop through all projects
 \newcommand{\projectItem}[4]{%
 	\begin{samepage}%
 		\begin{twocolentry}{%
-				\mbox{#1 | \hrefWithoutArrow{#2}{GitHub}}%
+				\formatProjectHeader{#1}{#2}%
 			}%
 			\textbf{#3}%
 		\end{twocolentry}%

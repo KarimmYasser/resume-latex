@@ -166,294 +166,301 @@
 
 ## Projects
 
-### 1. Commit-Based Analysis Tool (CAT) - 54.5x Test Impact Analysis Optimization
+### 1. Thermal Sentinel Grid - Physical-AI Digital Twin & Autonomous Agentic Dispatch Engine
+*Aug 2026* | [GitHub](https://github.com/KarimmYasser/thermal-sentinel-grid) | [Live Demo](https://www.thermal-sentinel-grid.live)
+
+Conceived and engineered **Thermal Sentinel Grid**, a **Wave 4 Physical-AI Digital Twin** and autonomous agentic decision-support engine for substation transformers and urban power grid resilience during extreme heatwaves, built for the FortyGuard AI Hackathon 2026. Solved the critical microclimate blind spot where grid assets operate in the scorching **2-meter boundary layer** above radiating asphalt and street canyons (Phoenix July 2023 benchmark: **42.74°C peak parcel ambient**, 12 consecutive hours $\ge 40^\circ\mathrm{C}$, $P_{40}=12.0\,\mathrm{h}$, $H_{40}=17.48\,^\circ\mathrm{C}\cdot\mathrm{h}$, $\mathrm{TSI}=3.68$) rather than regional airport weather towers 10+ miles away, preventing catastrophic transformer blowouts (>\$2.8M replacements) driven by cumulative thermal soak. Architected an end-to-end **4-Layer Physical-AI Platform**: **Layer 1 (Perception)** ingests FortyGuard's async submit-and-poll REST API (`/v1/heatmap`, `/v1/env_params`, `/v1/status`) to stream 2m convective tiles (60m resolution), 12h AI forecasts, and urban morphology (albedo, canyon $H/W$); **Layer 2 (Digital Twin Physics)** solves **IEEE C57.91 Annex G & IEC 60076-7 non-linear ODEs** ($\Delta\theta_{\mathrm{TO}}, \Delta\theta_{\mathrm{HS}}$, $n=0.8, m=0.8$, error $<0.0001^\circ\mathrm{C}$ vs IEEE standard dataset) via exact discrete-time exponential updates ($\Delta t=5\mathrm{min}$), coupled with **IEC 60287-1-1 cable-soil dryout** ($\rho_{\mathrm{soil}}$ surging from $0.90 \to >2.50\,\mathrm{K}\cdot\mathrm{m/W}$), **Oke/Evola canyon aerodynamics** ($\kappa_{\mathrm{morph}}$, $\eta_{\mathrm{cool}}=-32\%$), **Fick's Second Law virtual moisture desorption** ($RS_o$ dielectric arcing breakdown), **IEEE Std 738-2012 Dynamic Line Rating** ($q_c + q_r = q_s + I^2R$, $+22.5\%$ ampacity headroom, catenary sag $S(T_c)$), **coupled 2-state BESS thermal ODEs with Arrhenius SEI capacity fade** ($dQ_{\mathrm{loss}}/dt$, $55^\circ\mathrm{C}$ ceiling), and an **Arrhenius-Weibull Poisson hazard model** $\lambda_i(t, T)$ computing joint cascading grid failure probability ($P_{\mathrm{cascade}}$); **Layer 3 (Cognitive Planner)** implements a 5-node cyclic **LangGraph StateGraph** (`Forecast Ingest` $\to$ `Physics Solver` $\to$ `Mitigation Planner` $\to$ `Deterministic Safety Gate` $\to$ `Audit Dispatch`) for 12h proactive multi-asset scheduling (BESS peak shaving $0-50\,\mathrm{MWh}$, dual-stage fans, EV load shifting); **Layer 4 (Safety Gate)** enforces a non-LLM, **Control Barrier Function (CBF)-inspired deterministic filter** executing 4-bus Forward-Backward Sweep AC power flow with OLTC to guarantee ANSI C84.1 voltage ($0.95-1.05\,\mathrm{pu}$), IEEE hot-spot ceiling ($\le 140^\circ\mathrm{C}$), BESS SOC ($20\%-90\%$), and $N-1$ contingency reserves via bisection constraint projection ($K_{\mathrm{safe}}$). Built a full Data Science Studio featuring a **Medallion Architecture ETL** (Bronze $\to$ Silver $\to$ Gold, 18 features), a **$5000\times$ Physics-Surrogate ML Model** (Ridge Regression + 2nd-deg polynomial features, $R^2=0.9987, \mathrm{MAE}<1.5^\circ\mathrm{C}$), Isolation Forest sensor anomaly detection, Weibull Remaining Useful Life (RUL) survival curves, and an automated ground-truth validation suite benchmarking against NOAA IEM/ASOS (KPHX) and ECMWF ERA5-Land reanalysis. Integrated an operator dashboard with portfolio triage ranking, OSHA/NIOSH wet-bulb worker screening, and a **Model Context Protocol (MCP)** tool server exposing JSON-RPC operations with SHA-256 cryptographic audit ledgers. Demonstrated scenario economics on the canonical Phoenix replay avoiding **\$2,566,193 net loss exposure** (180 MWh outage prevented via LBNL ICE Calculator $\mathrm{VoLL}=\$12.50/\mathrm{kWh}$, saving $365.4$ equivalent transformer aging hours with hot-spot held to $122.53^\circ\mathrm{C}$) at $\$469$ dispatch cost (**$5,472\times$ cost ratio**). Implemented a **17-table hybrid persistence layer** (SQLite + Supabase PostgREST PostgreSQL) and verified system robustness across **177 passing pytests**, served via FastAPI (Python 3.13) and a React 19 / TypeScript / Vite dashboard with Apache ECharts and KaTeX typography.
+
+---
+
+### 2. Commit-Based Analysis Tool (CAT) - 54.5x Test Impact Analysis Optimization
 *Jul 2026 - Aug 2026*
 
 Engineered an end-to-end performance and architectural overhaul of the **Commit-Based Analysis Tool (CAT)**, a Regression Test Selection (**RTS**) platform for Siemens EDA's **Solido Design Environment** (3,275 test suites, 20.25M coverage rows, 21 GB corpus). Slashed end-to-end database creation time from **23.6 hours to 26 minutes** (**~54.5x speedup** / 98.2% runtime reduction) by eliminating intermediate JSON serialization and replacing an **11-hour CI `coverage json` conversion phase** with a high-throughput **native SQLite coverage reader** (`NativeCoverageWorkerPool`, 10.4x whole-path speedup). Solved catastrophic **45.7 GB OOM crashes** via bounded queue backpressure and incremental parser scratch nulling (4.3x per-worker RAM reduction: 1,613 MB to 378 MB; pool footprint ~25 GB to ~6 GB). Engineered a cross-version Python 3.9/3.11 fidelity worker (0 diffs), a lock-free **persistent content-addressed AST parse cache** (SHA-256 keyed), and an **incremental Copy-on-Write ingestion** pipeline with SHA-256 manifest gating (**0.05s** unchanged runs, median **7.5s** per merge across 49 CI commits). Formulated **Size-Adaptive Dispatch** ($f^*=10%$), optimized SQLite with **covering indexes** and batched queries (**4.82x faster reads**, eliminating 3.8M lookups), enabled transactional schema migrations (`PRAGMA user_version`, v0 $\to$ v8), and cut NFS write time by **-59%**. Researched **Branch-Arc Signatures** to collapse explosive high-fan-in test selections by **690x** (6.88M to 9,981 arc groups; `getLogger` 3,146 to 5 groups) with 100% determinism, validated via a `cosmic-ray` mutation testing harness (20/20 green baseline).
 
 ---
 
-### 2. Autonomous Agentic CFD Pipeline (OpenFOAM Multi-Agent System)
+### 3. Autonomous Agentic CFD Pipeline (OpenFOAM Multi-Agent System)
 *Jul 2026 - Aug 2026* | [GitHub](https://github.com/KarimmYasser/NU-research-intern)
 
 Architected an autonomous **Multi-Agent AI Pipeline** and **Dual Entry-Point Platform** via advanced **Agent Harness Engineering**, translating natural language simulation prompts into verified, runnable **OpenFOAM** CFD cases using local LLMs (**Ollama/vLLM**) on isolated infrastructure. Developed a deterministic **LangGraph state graph** featuring an automated **self-healing loop**, targeted file-patching LLM nodes, and an evidence-backed **Safe Exit protocol** with anti-laziness filters, paired with an interactive 19-tool **Model Context Protocol (MCP) server** and native **TypeScript Pi extension adapter** (JSON-RPC stdio). Built a **Structured IR + Deterministic Renderer** engine across 18 solver families enforcing **OpenFOAM v13 guardrails** (727+ tutorial corpus analysis) to eliminate C++ dictionary syntax errors and legacy v9 drift. Implemented a **3-Level Preflight Gate** (static dictionary audit, checkMesh evaluation, residual log-slope convergence predictor) catching errors before execution to eliminate up to **~2 days of wasted compute time**, an automated **Run Snapshot Engine** (64 KB reproducible verification artifacts from 374 MB runs), and a **Docker validation ladder** supporting parallel Scotch decomposition (**MPI**, verified on multi-rank RHVT benchmarks), linear solver iteration bounding (**15x speedup**, 10.6M+ cells), and early NaN aborts. Validated across **288+ automated tests** (pytest, TS adapter, shell) and packaged as a one-command air-gapped bundle.
 
 ---
 
-### 3. Distributed E-Commerce Microservices Platform (Spring Cloud)
+### 4. Distributed E-Commerce Microservices Platform (Spring Cloud)
 *Jul 2026* | [GitHub](https://github.com/KarimmYasser/ecommerce-microservices-platform)
 
 Architected a production-grade distributed microservices backend with **Spring Boot 3** and **Spring Cloud (2025)** across 6 deployables. Implemented a strict **database-per-service** architecture (MySQL), a synchronous **Distributed Checkout Saga** with automated compensation logic, and perimeter **JWT stateless security** via **Spring Cloud Gateway**. Engineered fault-tolerant inter-service RPCs with **OpenFeign** and **Resilience4j** (Circuit Breakers, Retries, Time Limiters), centralized configuration via **Spring Cloud Config Server**, and service discovery with **Netflix Eureka**. Comprehensive test coverage via **Testcontainers** and **WireMock**.
 
 ---
 
-### 4. QA Copilot (guardband) - Multi-Agent Test Intelligence Platform
+### 5. QA Copilot (guardband) - Multi-Agent Test Intelligence Platform
 *Jun 2026 - Jul 2026*
 
 Architected a multi-agent QA test intelligence copilot for variation-aware IC design verification software (**Siemens Solido Design Environment**). Designed 4 specialized Claude/Gemini/Groq agents: **SpecAnalyzer** (FURPS+ requirement tagging), **TestGenerator** (happy/boundary/negative/adversarial synthesis), **RiskPrioritizer** (impact $\times$ likelihood P0--P3 risk scoring), and **LogTriage** (root-causing massive Monte Carlo, PVT corner, and High-Sigma HSMC regression logs into `REGRESSION`, `FLAKY`, `ENVIRONMENT`, and `NEEDS_HUMAN` verdicts with cited evidence). Built a full-stack platform with **FastAPI**, an interactive **React/Vite** dashboard, and one-command **Docker Compose** deployment.
 
 ---
 
-### 5. WASAF - Waveform-Aware Semantic Analysis Framework for Analog EDA
+### 6. WASAF - Waveform-Aware Semantic Analysis Framework for Analog EDA
 *Jun 2026 - Jul 2026*
 
 Architected an open-source 4-layer semantic analysis framework for analog circuit simulation waveforms (RAW, PSF) bridging SPICE simulators (**Cadence Spectre, Eldo/AFS, ngspice**) with grounded AI reasoning. Built **L1 IO** parser adapters (`spicelib`, `psf-parser`) into a multidimensional `WaveformDataset` handling corner/Monte Carlo sweeps; engineered **L2 DSP Feature Extractors** (step responses, settling time, damping ratio $\zeta$, phase margin, slew rate, THD) with confidence scores; designed **L3 Kleene 3-valued logic** rule engine with YAML knowledge bases; and created **L4 LLM reasoning** with structured anti-hallucination serialization. Enforced spec-first design with 187+ unit/property tests.
 
 ---
 
-### 6. GSoC Pathfinder - AI Agent Organization Matcher
+### 7. GSoC Pathfinder - AI Agent Organization Matcher
 *Jun 2026* | [GitHub](https://github.com/KarimmYasser/GSoCPathfinder)
 
 Built an end-to-end **AI Agent** system that matches candidate profiles to **Google Summer of Code** organizations using a **LangGraph** agentic pipeline. Ingested and canonicalized **11 years** of GSoC data (663 organizations, 12k+ projects) into a **dual-database** store: **Neo4j** for temporal knowledge graph queries and **Qdrant** for semantic vector search. Engineered a **high-performance Rust scoring engine** (PyO3/Maturin) implementing a **7-Factor weighted ranking** (Skill Overlap, Semantic Similarity, Recency, Topic Alignment, Project Volume, Org Stability, LLM Relevance) with CV-frequency-weighted Jaccard similarity. Exposed endpoints via **FastAPI** and built an interactive **React/Vite** dashboard featuring a 2D force-directed **Knowledge Graph Visualizer**, CV gap analysis & learning roadmap optimizer, proposal draft generator, and a draggable chat assistant.
 
 ---
 
-### 7. Wavelength - Automated 3-Stage arXiv Research Discovery Pipeline
+### 8. Wavelength - Automated 3-Stage arXiv Research Discovery Pipeline
 *May 2026 - Jun 2026*
 
 Engineered an automated research intelligence pipeline discovering and evaluating cutting-edge computer science papers from arXiv. Built **Stage 1 Scraper** with deduplication, priority category filtering (`cs.AI`, `cs.LG`, `cs.SE`, `cs.CR`), and SQLite WAL persistence; developed **Stage 2 First Review** executing batch LLM evaluations across 7 scoring dimensions (novelty, feasibility, recruiter impact, industry relevance, composite); and built **Stage 3 Second Review** implementing strict quality control to eliminate category inflation, detect reproduction vs genuine novelty, and generate structured research roadmaps (`ideas.md`, `trends.md`).
 
 ---
 
-### 8. Autonomous Wall-Following Robot (Sim-to-Real Development)
+### 9. Autonomous Wall-Following Robot (Sim-to-Real Development)
 *Apr 2026 - May 2026* | [GitHub](https://github.com/KarimmYasser/robot-wall-follower)
 
 Engineered a high-performance autonomous robot bridging **Webots Digital Twin** simulation and hardware. Developed professional-grade **bare-metal C** firmware for **ATmega328P** utilizing **Timer1** and **EXTI/PCINT** interrupts for non-blocking sensing. Designed a **Cascaded PID Controller** nesting a wall-distance loop within an **IMU-based** heading loop for fluid navigation and exact 90° pivots, utilizing **First-order Lag Filters** for sensor signal smoothing. Implemented a **Finite State Machine (FSM)** for autonomous decision-making and integrated real-time turn sequence telemetry reporting via **Bluetooth (HC-05)**.
 
 ---
 
-### 9. Aladdin: Nasira's Revenge - C++ Game Engine
+### 10. Aladdin: Nasira's Revenge - C++ Game Engine
 *Mar 2026 - May 2026* | [GitHub](https://github.com/KarimmYasser/aladdin-nasiras-revenge)
 
 Developed a high-performance 3D engine using **C++17** and **OpenGL 3.3** featuring a data-driven **Entity Component System (ECS)** with deferred lifecycle management for memory stability. Engineered a **command-based renderer** with **16k shadow mapping** and GPU-accelerated vertex skinning. Built a **miniaudio**-based system with disk-streamed BGM and integrated **FFmpeg** for real-time video streaming. Optimized world geometry via **Greedy Rectangular Merging** and implemented reactive **Finite State Machine (FSM)** AI for autonomous enemy behavior.
 
 ---
 
-### 10. Industrial Machine Sound Classification & Anomaly Detection
+### 11. Industrial Machine Sound Classification & Anomaly Detection
 *Mar 2026 - May 2026* | [GitHub](https://github.com/KarimmYasser/machine-sound-classification)
 
 Architected a **Dual-Track AI pipeline** for predictive maintenance of **pumps, fans, and motors** (56k recordings). Developed an **XGBoost edge champion** (<10ms latency) and **EfficientAT** (EfficientNet + Transformer) for cloud diagnostics, achieving **95.61% accuracy**. Engineered a high-performance **Rust engine** using **PyO3** and **Rayon**, achieving a **57x speedup** in feature extraction. Resolved severe data imbalance using **Conditional GANs (CGAN)** and eliminated session leakage through **DBSCAN Cluster-Aware splitting**. Deployed via **Docker** and **Hugging Face**.
 
 ---
 
-### 11. Cryptographic Research: Multi-Architecture Hash Competition
+### 12. Cryptographic Research: Multi-Architecture Hash Competition
 *Apr 2026* | [GitHub](https://github.com/KarimmYasser/crypto-hash-architecture-analysis)
 
 Evaluated **10 distinct cryptographic hash architectures** (BLAKE, Keccak, Skein, etc.) to analyze the trade-off between **diffusion speed** and **structural integrity**. Developed a **custom "Hidden Security" test suite** to simulate advanced cryptanalysis, identifying and patching vulnerabilities to **Length-Extension Attacks (LEA)** and short-message bias. Engineered a high-performance **BLAKE-256** implementation from scratch using **ARX primitives** and **manual loop unrolling**, achieving a near-perfect **0.9998 security score**. Verified compliance with the **Strict Avalanche Criterion (SAC)** via automated hyperparameter tuning of rotation constants.
 
 ---
 
-### 12. AI API Evaluation Framework (GSoC 2026 Research & Implementation)
+### 13. AI API Evaluation Framework (GSoC 2026 Research & Implementation)
 *Mar 2026 - Apr 2026* | [GitHub](https://github.com/KarimmYasser/ai-eval-framework)
 
 Engineered a research-driven evaluation platform for **Multimodal AI** (Text, Image, Audio) and **Agentic Workflows** following a deep literature review of **MUSE**, **TopoBench**, and **BEHELM** frameworks. Implemented a **Five-Level Quality Taxonomy** and **Dual-Metric Framework** (Hard/Soft Scores) to analyze model fidelity beyond binary pass/fail metrics. Developed an **Agent Trace Viewer** for multi-turn loops, enabling granular **credit assignment** across reasoning and tool-calling steps. Built a high-performance **FastAPI** orchestrator with **SSE streaming** for real-time monitoring and integrated **lm-evaluation-harness** wrappers into a native **Flutter** dashboard.
 
 ---
 
-### 13. Research Initiative: Quantum Foundations & Post-Quantum Security
+### 14. Research Initiative: Quantum Foundations & Post-Quantum Security
 *Mar 2026 - Apr 2026*
 
 Conducted extensive theoretical research into **Quantum Computing foundations** (superposition, entanglement, Shor's and Grover's algorithms) to analyze the systemic threat to classical asymmetric cryptography. Investigated the mathematical structures of **Post-Quantum Cryptography (PQC)**, specifically **Code-Based** and **Lattice-Based** schemes. Evaluated constant-time encoding techniques for constant Hamming weight vectors, analyzing their role in mitigating **Side-Channel (Timing) Attacks** in a quantum-adversarial landscape.
 
 ---
 
-### 14. Space Station Supply Agent (ODC AI Training)
+### 15. Space Station Supply Agent (ODC AI Training)
 *Mar 2026* | [GitHub](https://github.com/KarimmYasser/sql-station-logistics-chatbot)
 
 Built a **LangGraph**-based conversational AI agent translating natural language into **SQLite** queries. Engineered an autonomous error recovery system with a self-healing loop and applied hallucination detection guards over token-optimized schemas.
 
 ---
 
-### 15. Adventure Time Lore Keeper (ODC AI Training)
+### 16. Adventure Time Lore Keeper (ODC AI Training)
 *Mar 2026* | [GitHub](https://github.com/KarimmYasser/neo4j-adventure-time-chatbot)
 
 Developed a conversational agent interacting with a **Neo4j** Knowledge Graph. Implemented dynamic **Cypher** query generation with self-healing error recovery, conversational memory, and automated entity alias resolution for consistent multi-turn interactions.
 
 ---
 
-### 16. Rusty Sherlook - High-Performance Search Engine
+### 17. Rusty Sherlook - High-Performance Search Engine
 *Feb 2026 - Mar 2026* | [GitHub](https://github.com/KarimmYasser/rusty-sherlook-engine)
 
 Engineered a high-concurrency extension to the Sherlook search engine in **Rust** utilizing **Tokio**. Integrated **Qdrant** for semantic vector search and **Neo4j** for advanced graph-based PageRank processing.
 
 ---
 
-### 17. BioMedIAMBZ - Brain Tumor Segmentation (1st Place)
+### 18. BioMedIAMBZ - Brain Tumor Segmentation (1st Place)
 *Feb 2026* | [GitHub](https://github.com/KarimmYasser/braTs-ai-hackathon-ODCxINSTANT)
 
 Won **1st place** in the ODC x INSTANT AI Hackathon by developing a 3D brain tumor segmentation pipeline using **MedNeXt** (ConvNeXt-based CNN) with **PyTorch** and **MONAI**. Achieved superior performance over Transformer architectures (UNETR, SwinUNETR) on the BraTS 2021 dataset through deep supervision and ensemble techniques. Engineered a **40x faster** preprocessing pipeline and deployed the model via **FastAPI** backend with **React Native** mobile interface for real-time inference.
 
 ---
 
-### 18. FM Stereo Broadcasting System Simulation
+### 19. FM Stereo Broadcasting System Simulation
 *Dec 2025* | [GitHub](https://github.com/KarimmYasser/FM_Stereo_System)
 
 Implemented a software-defined **FM Stereo Transmitter and Receiver** in **Python** using **NumPy** and **SciPy**. Conducted experimental analysis on frequency deviation, noise immunity, channel separation, filter design impact, and system robustness under oscillator drift.
 
 ---
 
-### 19. VLSI Convolution Systolic Accelerator
+### 20. VLSI Convolution Systolic Accelerator
 *Nov 2025 - Dec 2025* | [GitHub](https://github.com/KarimmYasser/VLSI-Convolution-Systolic-Accelerator)
 
 Designed a high-performance 2D convolution accelerator in **Verilog** using an 8x8 systolic array and SKY130 PDK. Implemented the full RTL-to-GDSII flow via OpenLane, featuring ping-pong buffering and fixed-point arithmetic for optimized neural network inference.
 
 ---
 
-### 20. 5-Stage Pipelined Processor
+### 21. 5-Stage Pipelined Processor
 *Oct 2025 - Dec 2025* | [GitHub](https://github.com/KarimmYasser/stall_3alda2ery)
 
 Designed a 32-bit 5-stage pipelined processor in VHDL with Von Neumann architecture, supporting interrupts and I/O. Implemented hazard handling via data forwarding and branch prediction, and built a custom assembler in Python to automate machine code generation.
 
 ---
 
-### 21. Yapper - X Clone Mobile App
+### 22. Yapper - X Clone Mobile App
 *Oct 2025 - Dec 2025* | [GitHub](https://github.com/KarimmYasser/yapper-mobile)
 
 Built a cross-platform **React Native** social media app with **Expo**, featuring real-time **WebSocket** messaging, push notifications, multi-language support with full **RTL**, AI-powered tweet summarization, and a comprehensive test suite with **CI/CD** automation via EAS.
 
 ---
 
-### 22. Walmart Sales Forecasting - ML Pipeline
+### 23. Walmart Sales Forecasting - ML Pipeline
 *Nov 2025* | [GitHub](https://github.com/KarimmYasser/Walmart-Sales-Forecasting-ML)
 
 Developed an end-to-end **ML pipeline** for weekly sales forecasting across 45 stores, achieving **99.96% R²** accuracy with **Random Forest**. Built 44 engineered features, deployed via **FastAPI** and **Streamlit** with **MLflow** tracking and **Docker** containerization.
 
 ---
 
-### 23. i'Supply POS App - First Place Hackathon Winner
+### 24. i'Supply POS App - First Place Hackathon Winner
 *Jun 2025* | [GitHub](https://github.com/KarimmYasser/isupply_app)
 
 Developed a cross-platform **Flutter POS system** for desktop and mobile, featuring inventory search, cart management, checkout, and invoice tracking. Integrated **Hive** for local storage and **Supabase** for the back-end with offline synchronization, supporting more than **1000 products** through paginated lists, leading to a **full-time** opportunity.
 
 ---
 
-### 24. Anghami PiP Chrome Extension
+### 25. Anghami PiP Chrome Extension
 *Sep 2025* | [GitHub](https://github.com/KarimmYasser/anghami_pip_extension)
 
 Engineered a TypeScript Chrome extension using the Document PiP API to create an always-on-top, system-level mini-player for the Anghami web app.
 
 ---
 
-### 25. Wuzzuf Engineering Jobs Scraper
+### 26. Wuzzuf Engineering Jobs Scraper
 *Sep 2025* | [GitHub](https://github.com/KarimmYasser/wuzzuf-job-scraper)
 
 Developed a web scraper using Python and Selenium to automatically extract engineering job listings from Wuzzuf.net and export the data to CSV/JSON.
 
 ---
 
-### 26. Coffee Shop Android App
+### 27. Coffee Shop Android App
 *Aug 2025 - Sep 2025* | [GitHub](https://github.com/KarimmYasser/coffee_shop)
 
 Developed an offline-first coffee shop using Kotlin Jetpack Compose, implementing Clean Architecture with MVVM, Hilt for dependency injection, Room, and Retrofit.
 
 ---
 
-### 27. Instagram Followers Analyzer
+### 28. Instagram Followers Analyzer
 *Aug 2025 - Sep 2025* | [GitHub](https://github.com/KarimmYasser/FollowersInstagram)
 
 Developed a privacy-focused Windows desktop application to locally analyze Instagram data exports and analyze followers.
 
 ---
 
-### 28. RecipeBox Recipe Management App
+### 29. RecipeBox Recipe Management App
 *Aug 2025* | [GitHub](https://github.com/KarimmYasser/recipe-box)
 
 Developed a modern, offline-first Android recipe app using Jetpack Compose, architected with Clean Architecture (MVVM), Room, and Dagger/Hilt.
 
 ---
 
-### 29. Personal Portfolio Website
+### 30. Personal Portfolio Website
 *Jul 2025 - Sep 2025* | [GitHub](https://github.com/KarimmYasser/portfolio)
 
 Engineered a modern, animated portfolio website with React and TypeScript, featuring a dynamic 3D background using Three.js, Framer Motion animations, and a Vercel serverless contact form.
 
 ---
 
-### 30. School Timetable Generator
+### 31. School Timetable Generator
 *Jul 2025 - Aug 2025* | [GitHub](https://github.com/KarimmYasser/school_scheduler)
 
 Developed an AI-driven school timetable generator in Python, using Google OR-Tools for constraint satisfaction, and featuring full bilingual (English/Arabic) support.
 
 ---
 
-### 31. SecureNotes Android App
+### 32. SecureNotes Android App
 *Jul 2025* | [GitHub](https://github.com/KarimmYasser/secure-notes)
 
 Developed a secure Android notes application using Jetpack Compose for the UI and Proto DataStore for type-safe, persistent settings management.
 
 ---
 
-### 32. Zengbary App
+### 33. Zengbary App
 *Mar 2025 - May 2025* | [GitHub](https://github.com/KarimmYasser/zengbary-app)
 
 Developed a Flutter app to remotely control a microprocessor-based robot with HTTP communication.
 
 ---
 
-### 33. Sherlook Web Engine
+### 34. Sherlook Web Engine
 *Mar 2025 - May 2025* | [GitHub](https://github.com/KarimmYasser/sher-look)
 
 Built a web search engine with a custom crawler, indexer, and ranking algorithm processing 50K+ pages.
 
 ---
 
-### 34. OS Process Scheduler Simulator
+### 35. OS Process Scheduler Simulator
 *Mar 2025 - May 2025* | [GitHub](https://github.com/KarimmYasser/kernel-sim-ohh-s)
 
 Simulated multiple CPU scheduling algorithms (FCFS, SJF, Priority, Round Robin) with real-time visualization and metric comparisons.
 
 ---
 
-### 35. Hangouts Crincale - Audio Analysis Tool
+### 36. Hangouts Crincale - Audio Analysis Tool
 *Feb 2025 - Mar 2025* | [GitHub](https://github.com/KarimmYasser/hangouts_crincale)
 
 Engineered a professional-grade, cross-platform audio analysis application in Flutter, providing tools for frequency response visualization, parametric equalization, and direct hardware control.
 
 ---
 
-### 36. Custom Unix Shell (cmpsh)
+### 37. Custom Unix Shell (cmpsh)
 *Feb 2025* | [GitHub](https://github.com/KarimmYasser/cmpsh)
 
 Implemented a lightweight Unix shell in C, demonstrating core OS concepts like process management (fork/exec), piping, and I/O redirection.
 
 ---
 
-### 37. Research: Adaptive Intrusion Detection via Behavioral Modeling
+### 38. Research: Adaptive Intrusion Detection via Behavioral Modeling
 *Dec 2024* | [GitHub](https://github.com/KarimmYasser/Intrusion-Detection-Systems)
 
 Engineered a data-driven **Intrusion Detection System (IDS)** to transition from static signature-based security to adaptive behavioral modeling. Analyzed the **RRE-KDD dataset** (148k+ events, 37 attack types) to define network baselines using **Random Forest ensembles** and statistical thresholding (**Z-score**, Moving Average). Validated anomaly detection accuracy through **Chi-square feature selection** and hypothesis testing. Awarded **7th place** at the **TCCD Research Day** for excellence in network security modeling.
 
 ---
 
-### 38. Fashion Assistant - E-commerce Platform
+### 39. Fashion Assistant - E-commerce Platform
 *Nov 2024 - Dec 2024* | [GitHub](https://github.com/KarimmYasser/Slash-Fashion-Assistant-App)
 
 Built a personalized shopping assistant with a chatbot and a product recommendation system.
 
 ---
 
-### 39. Bricks Breaker - Multiplayer Assembly Game
+### 40. Bricks Breaker - Multiplayer Assembly Game
 *Nov 2024 - Dec 2024* | [GitHub](https://github.com/KarimmYasser/brick-breaker-pro)
 
 Built a real-time multiplayer brick breaker game using Assembly with custom networking and graphics logic.
 
 ---
 
-### 40. AES Encryption - FPGA Implementation
+### 41. AES Encryption - FPGA Implementation
 *Feb 2024 - Apr 2024* | [GitHub](https://github.com/KarimmYasser/AES)
 
 Redesigned AES-128/192/256 in Verilog for FPGA, achieving 40% faster encryption using pipelining and parallelism.
 
 ---
 
-### 41. Alien Invasion Simulator
+### 42. Alien Invasion Simulator
 *Feb 2024 - Apr 2024* | [GitHub](https://github.com/KarimmYasser/Alien_Invasion_Project)
 
 Designed and implemented an alien invasion simulator in C++ as part of a team, featuring custom-built data structures and object-oriented design patterns.
 
 ---
 
-### 42. Paint for Kids
+### 43. Paint for Kids
 *Nov 2023 - Jan 2024* | [GitHub](https://github.com/KarimmYasser/paint-for-kids)
 
 Developed an educational drawing and gaming application for children in C++, implementing key design patterns like Command and Factory for its architecture.
@@ -469,28 +476,28 @@ Dart, Kotlin, Python, C, C++, Rust, Java, TypeScript, JavaScript, SQL, Assembly
 Flutter (Mobile & Desktop), Android Development (Kotlin, Jetpack Compose, XML Views), React Native (Expo)
 
 ### Frameworks & Libraries
-Spring Boot 3, Spring Cloud (Gateway, Eureka, Config, OpenFeign), Spring Security 6, Resilience4j, Testcontainers, WireMock, LangGraph, LangChain, Pydantic, Flutter Bloc, Riverpod, Provider, GetX, Dagger/Hilt, Android Navigation Component, Room, Retrofit, Firebase, RESTful APIs, Zustand, React Query, Socket.io, Axios, i18next, Zod, PyTorch, MONAI, PyTorch Lightning, Scikit-learn, Pandas, NumPy, Streamlit, Selenium, FastAPI, OpenGL, ReactPhysics3D, Assimp, FFmpeg, miniaudio, ATmega328P (AVR), Tkinter
+Spring Boot 3, Spring Cloud (Gateway, Eureka, Config, OpenFeign), Spring Security 6, Resilience4j, Testcontainers, WireMock, LangGraph, LangChain, Pydantic, Flutter Bloc, Riverpod, Provider, GetX, Dagger/Hilt, Android Navigation Component, Room, Retrofit, Firebase, RESTful APIs, Zustand, React Query, Socket.io, Axios, i18next, Zod, PyTorch, MONAI, PyTorch Lightning, Scikit-learn, Pandas, NumPy, Streamlit, Selenium, FastAPI, OpenGL, ReactPhysics3D, Assimp, FFmpeg, miniaudio, ATmega328P (AVR), Tkinter, SciPy, Apache ECharts, KaTeX
 
 ### Backend & Database
-Supabase, Firebase, MySQL, SQLite Performance Tuning (WAL Mode), Covering Indexes & Query Optimization, Schema Versioning & Migrations (PRAGMA user_version), High-Throughput Bulk Ingest, Room, Database Design, Offline-first Architecture, API Integration
+Supabase, Firebase, MySQL, SQLite Performance Tuning (WAL Mode), Covering Indexes & Query Optimization, Schema Versioning & Migrations (PRAGMA user_version), High-Throughput Bulk Ingest, Room, Database Design, Offline-first Architecture, API Integration, PostgREST, Hybrid Dual-Storage Architecture (SQLite + Supabase PostgreSQL), Medallion Architecture (Bronze-Silver-Gold ETL), Content-Addressed Caching (MD5/SHA-256 API Ledgers)
 
 ### Development Tools
 Git, GitHub, Docker, Ollama, vLLM, Linux (Ubuntu), Pytest, Jupyter Notebooks, VS Code, Android Studio, MLflow, Hugging Face, Jest, ESLint, EAS (Expo), Web Scraping, Agile/Scrum
 
 ### Software Engineering
-Clean Architecture, SOLID Principles, Agent Harness Engineering, Model Context Protocol (MCP), MCP Tool Servers & SDKs, TypeScript/Python Extension Adapters, Run Snapshot & Provenance Logging, Spec-First Architecture, FURPS+ Requirements Engineering, Log Triage & Flakiness Detection, Digital Signal Processing (DSP) for EDA, Distributed Saga Pattern & Compensating Transactions, Database-per-Service Architecture, Circuit Breaker Pattern, API Gateway Pattern & Perimeter Security, Test Impact Analysis (TIA) / RTS, Mutation Testing (Cosmic-Ray), Amdahl's Law Optimization, Cross-Version Runtime Fidelity, Coverage Execution Non-Determinism Analysis, NFS Locking & I/O Optimization, Performance Profiling & Bottleneck Optimization, Multiprocessing Worker Pools & Backpressure, Content-Addressed Caching, Copy-on-Write (COW) Data Pipelines, Size-Adaptive Dispatch Algorithms, Multi-Agent System Architecture, Structured Intermediate Representation (IR), Deterministic Rendering, Self-Healing / Self-Correction Loops, Fail-Fast Preflight Auditing, Dependency Injection, State Management, Object-Oriented Programming (OOP), Design Patterns, Search Engine Architecture, CRUD Applications, Entity Component System (ECS), Finite State Machines (FSM), Cascaded PID Control, Memory Stability & Lifecycle Management, ML Pipelines
+Clean Architecture, SOLID Principles, Agent Harness Engineering, Model Context Protocol (MCP), MCP Tool Servers & SDKs, TypeScript/Python Extension Adapters, Run Snapshot & Provenance Logging, Spec-First Architecture, FURPS+ Requirements Engineering, Log Triage & Flakiness Detection, Digital Signal Processing (DSP) for EDA, Distributed Saga Pattern & Compensating Transactions, Database-per-Service Architecture, Circuit Breaker Pattern, API Gateway Pattern & Perimeter Security, Test Impact Analysis (TIA) / RTS, Mutation Testing (Cosmic-Ray), Amdahl's Law Optimization, Cross-Version Runtime Fidelity, Coverage Execution Non-Determinism Analysis, NFS Locking & I/O Optimization, Performance Profiling & Bottleneck Optimization, Multiprocessing Worker Pools & Backpressure, Content-Addressed Caching, Copy-on-Write (COW) Data Pipelines, Size-Adaptive Dispatch Algorithms, Multi-Agent System Architecture, Structured Intermediate Representation (IR), Deterministic Rendering, Self-Healing / Self-Correction Loops, Fail-Fast Preflight Auditing, Dependency Injection, State Management, Object-Oriented Programming (OOP), Design Patterns, Search Engine Architecture, CRUD Applications, Entity Component System (ECS), Finite State Machines (FSM), Cascaded PID Control, Memory Stability & Lifecycle Management, ML Pipelines, Physical-AI Digital Twins, Control Barrier Function (CBF) Invariant Safety Gates, Deterministic Safety Envelopes, Forward-Backward Sweep (FBS) AC Power Flow, Microclimate Boundary-Layer Modeling, Discrete Matrix Exponential ODE Integration, Bounded-Trajectory Barrier Filters
 
 ### Data Science
-Data Analysis, Exploratory Data Analysis (EDA), Feature Engineering, Feature Selection (Chi-square), Dimensionality Reduction (PCA), Welch's t-test (Side-Channel Analysis), Z-score & Behavioral Modeling, NLP Metrics (BLEU, ROUGE, WER, CER)
+Data Analysis, Exploratory Data Analysis (EDA), Feature Engineering, Feature Selection (Chi-square), Dimensionality Reduction (PCA), Welch's t-test (Side-Channel Analysis), Z-score & Behavioral Modeling, NLP Metrics (BLEU, ROUGE, WER, CER), Physics-Informed Machine Learning (Surrogate Modeling), Polynomial Feature Interaction, Isolation Forest (Sensor Anomaly Detection), Weibull Survival Analysis & Remaining Useful Life (RUL), Paired t-tests & Spearman Rank Correlation, Value of Lost Load (VoLL / LBNL ICE Calculator)
 
 ### Artificial Intelligence
-Autonomous Multi-Agent Pipelines, Agent Harness Engineering, Model Context Protocol (MCP) Tooling, Multi-Model Agent Orchestration (Claude, Gemini, Groq), Local LLM Deployment (Ollama/vLLM), Agentic Self-Healing & Self-Correction Loops, Multi-Stage LLM Evaluation & Rubric Scoring, Kleene 3-Valued Logic Rule Engines, Chunkless RAG & Semantic Taxonomies, Physical-Envelope Constraint Layers, Verifiable Evidence & Safe Exit Protocols, Supervised Learning, Unsupervised Learning, Deep Learning (CNNs), 3D Medical Image Segmentation, Random Forest, Support Vector Machines (SVM), Clustering (DBSCAN, HDBSCAN), Hyperparameter Tuning, Cryptography (ARX, LEA Resistance, SAC/BIC), Post-Quantum Cryptography (PQC), Constraint Satisfaction, Multimodal AI Evaluation, Agentic Workflow Analysis, LLM-as-a-Judge
+Autonomous Multi-Agent Pipelines, Agent Harness Engineering, Model Context Protocol (MCP) Tooling, Multi-Model Agent Orchestration (Claude, Gemini, Groq), Local LLM Deployment (Ollama/vLLM), Agentic Self-Healing & Self-Correction Loops, Multi-Stage LLM Evaluation & Rubric Scoring, Kleene 3-Valued Logic Rule Engines, Chunkless RAG & Semantic Taxonomies, Physical-Envelope Constraint Layers, Verifiable Evidence & Safe Exit Protocols, Supervised Learning, Unsupervised Learning, Deep Learning (CNNs), 3D Medical Image Segmentation, Random Forest, Support Vector Machines (SVM), Clustering (DBSCAN, HDBSCAN), Hyperparameter Tuning, Cryptography (ARX, LEA Resistance, SAC/BIC), Post-Quantum Cryptography (PQC), Constraint Satisfaction, Multimodal AI Evaluation, Agentic Workflow Analysis, LLM-as-a-Judge, Physical AI (Wave 4), LangGraph Cyclic StateGraph Workflows, Physics-Constrained Agentic Decision-Support, Autonomous Dispatch Optimization, Non-LLM Safety Verification Gates, Surrogate Physics Ridge Regression
 
 ### Research Skills
 Regression Test Selection (RTS) Research, Branch-Arc Execution Signatures, Mutation-Score Retention Analysis, Agentic Verification & Safety Protocols, RLVR & Self-Evolving Curricula (SEC), 40-Paper SOTA Review (LLM+CFD Systems), Systematic Benchmarking, Survey Design, Problem Validation, Market Research, Ideation, Data Collection, Literature Review
 
 ### Specialized Skills
-Analog Waveform Parsing (PSF/RAW/SPICE), Variation-Aware IC Verification (PVT Corners, High-Sigma Monte Carlo), EDA Software QA Automation, Simulation Pipeline Automation (OpenFOAM C++ Case Generation), Static Dictionary Auditing & Parsing, Convergence Prediction (Residual Log-Slope Regression), Parallel Process Orchestration (MPI / Container Isolation), Operating Systems, Systems Programming (Process Management, IPC), Algorithms, Data Structures, Microprocessors, FPGA, Embedded C (Bare-Metal, Register-Level Drivers), Robot Simulation (Webots), Hash Function Design (BLAKE, Keccak, Skein), Quantum Algorithms (Shor's, Grover's), Post-Quantum Security Analysis, Intrusion Detection Systems (IDS), MUSE Framework (Dual-Metric Scoring), Side-Channel Timing Analysis, Game Engine Architecture, Computer Graphics, Video Decoding (FFmpeg), Audio Engineering
+Analog Waveform Parsing (PSF/RAW/SPICE), Variation-Aware IC Verification (PVT Corners, High-Sigma Monte Carlo), EDA Software QA Automation, Simulation Pipeline Automation (OpenFOAM C++ Case Generation), Static Dictionary Auditing & Parsing, Convergence Prediction (Residual Log-Slope Regression), Parallel Process Orchestration (MPI / Container Isolation), Operating Systems, Systems Programming (Process Management, IPC), Algorithms, Data Structures, Microprocessors, FPGA, Embedded C (Bare-Metal, Register-Level Drivers), Robot Simulation (Webots), Hash Function Design (BLAKE, Keccak, Skein), Quantum Algorithms (Shor's, Grover's), Post-Quantum Security Analysis, Intrusion Detection Systems (IDS), MUSE Framework (Dual-Metric Scoring), Side-Channel Timing Analysis, Game Engine Architecture, Computer Graphics, Video Decoding (FFmpeg), Audio Engineering, IEEE C57.91 Annex G (Transformer Thermal Modeling), IEC 60076-7 (Loading Guide for Oil-Immersed Transformers), IEC 60287-1-1 (Underground Cable Thermal Resistivity & Soil Dryout), IEEE Std 738 (Dynamic Line Rating & Conductor Catenary Sag), ANSI C84.1 Voltage Standards, Arrhenius-Weibull Asset Aging & Fragility Hazards, Fick's Law Cellulose Moisture Desorption, Oke/Evola Canyon Aerodynamics, Battery Energy Storage Systems (BESS) Coupled Electro-Thermal ODEs, Arrhenius SEI Capacity Degradation, NOAA IEM/ASOS & ERA5-Land Ground-Truth Validation
 
 ---
 

@@ -193,6 +193,11 @@
 % ============================================================
 
 \newcommand{\projectsList}{%
+    {Aug 2026}%
+    {https://github.com/KarimmYasser/thermal-sentinel-grid}%
+    {Thermal Sentinel Grid - Physical-AI Digital Twin \& Autonomous Agentic Dispatch Engine}%
+    {Conceived and engineered \textbf{Thermal Sentinel Grid}, a \textbf{Wave 4 Physical-AI Digital Twin} and autonomous agentic decision-support engine for substation transformers and urban power grid resilience during extreme heatwaves, built for the FortyGuard AI Hackathon 2026. Solved the critical microclimate blind spot where grid assets operate in the scorching \textbf{2-meter boundary layer} above radiating asphalt and street canyons (Phoenix July 2023 benchmark: \textbf{42.74$^\circ$C peak parcel ambient}, 12 consecutive hours $\ge 40^\circ$C, $P_{40}=12.0$~h, $H_{40}=17.48^\circ\text{C}\cdot\text{h}$, $\text{TSI}=3.68$) rather than regional airport weather towers 10+ miles away, preventing catastrophic transformer blowouts ($>\$2.8\text{M}$ replacements) driven by cumulative thermal soak. Architected an end-to-end \textbf{4-Layer Physical-AI Platform}: \textbf{Layer 1 (Perception)} ingests FortyGuard's async submit-and-poll REST API (\texttt{/v1/heatmap}, \texttt{/v1/env\_params}, \texttt{/v1/status}) to stream 2m convective tiles (60m resolution), 12h AI forecasts, and urban morphology (albedo, canyon $H/W$); \textbf{Layer 2 (Digital Twin Physics)} solves \textbf{IEEE C57.91 Annex G \& IEC 60076-7 non-linear ODEs} ($\Delta\theta_{\text{TO}}, \Delta\theta_{\text{HS}}$, $n=0.8, m=0.8$, error $<0.0001^\circ$C vs IEEE standard dataset) via exact discrete-time exponential updates ($\Delta t=5$~min), coupled with \textbf{IEC 60287-1-1 cable-soil dryout} ($\rho_{\text{soil}}$ surging from $0.90 \to >2.50\text{ K}\cdot\text{m/W}$), \textbf{Oke/Evola canyon aerodynamics} ($\kappa_{\text{morph}}$, $\eta_{\text{cool}}=-32\%$), \textbf{Fick's Second Law virtual moisture desorption} ($RS_o$ dielectric arcing breakdown), \textbf{IEEE Std 738-2012 Dynamic Line Rating} ($q_c + q_r = q_s + I^2R$, $+22.5\%$ ampacity headroom, catenary sag $S(T_c)$), \textbf{coupled 2-state BESS thermal ODEs with Arrhenius SEI capacity fade} ($dQ_{\text{loss}}/dt$, $55^\circ$C ceiling), and an \textbf{Arrhenius-Weibull Poisson hazard model} $\lambda_i(t, T)$ computing joint cascading grid failure probability ($P_{\text{cascade}}$); \textbf{Layer 3 (Cognitive Planner)} implements a 5-node cyclic \textbf{LangGraph StateGraph} (\texttt{Forecast Ingest} $\to$ \texttt{Physics Solver} $\to$ \texttt{Mitigation Planner} $\to$ \texttt{Deterministic Safety Gate} $\to$ \texttt{Audit Dispatch}) for 12h proactive multi-asset scheduling (BESS peak shaving 0--50 MWh, dual-stage fans, EV load shifting); \textbf{Layer 4 (Safety Gate)} enforces a non-LLM, \textbf{Control Barrier Function (CBF)-inspired deterministic filter} executing 4-bus Forward-Backward Sweep AC power flow with OLTC to guarantee ANSI C84.1 voltage (0.95--1.05~pu), IEEE hot-spot ceiling ($\le 140^\circ$C), BESS SOC (20\%--90\%), and $N-1$ contingency reserves via bisection constraint projection ($K_{\text{safe}}$). Built a full Data Science Studio featuring a \textbf{Medallion Architecture ETL} (Bronze $\to$ Silver $\to$ Gold, 18 features), a \textbf{5000x Physics-Surrogate ML Model} (Ridge Regression + 2nd-deg polynomial features, $R^2=0.9987, \text{MAE}<1.5^\circ$C), Isolation Forest sensor anomaly detection, Weibull Remaining Useful Life (RUL) survival curves, and an automated ground-truth validation suite benchmarking against NOAA IEM/ASOS (KPHX) and ECMWF ERA5-Land reanalysis. Integrated an operator dashboard with portfolio triage ranking, OSHA/NIOSH wet-bulb worker screening, and a \textbf{Model Context Protocol (MCP)} tool server exposing JSON-RPC operations with SHA-256 cryptographic audit ledgers. Demonstrated scenario economics on the canonical Phoenix replay avoiding \textbf{\$2,566,193 net loss exposure} (180 MWh outage prevented via LBNL ICE Calculator $\text{VoLL} = \$12.50/\text{kWh}$, saving 365.4 equivalent transformer aging hours with hot-spot held to $122.53^\circ$C) at \$469 dispatch cost (\textbf{5,472x cost ratio}). Implemented a \textbf{17-table hybrid persistence layer} (SQLite + Supabase PostgREST PostgreSQL) and verified system robustness across \textbf{177 passing pytests}, served via FastAPI (Python 3.13) and a React 19 / TypeScript / Vite dashboard with Apache ECharts and KaTeX typography.}%
+    |||
     {Jul 2026 - Aug 2026}%
     {}%
     {Commit-Based Analysis Tool (CAT) - 54.5x Test Impact Analysis Optimization}%
@@ -472,7 +477,10 @@ Assimp,
 FFmpeg,
 miniaudio,
 ATmega328P (AVR),
-Tkinter
+Tkinter,
+SciPy,
+Apache ECharts,
+KaTeX
 }
 
 \newcommand{\backendDatabase}{
@@ -486,7 +494,11 @@ High-Throughput Bulk Ingest,
 Room,
 Database Design,
 Offline-first Architecture,
-API Integration
+API Integration,
+PostgREST,
+Hybrid Dual-Storage Architecture (SQLite + Supabase PostgreSQL),
+Medallion Architecture (Bronze-Silver-Gold ETL),
+Content-Addressed Caching (MD5/SHA-256 API Ledgers)
 }
 
 \newcommand{\developmentTools}{
@@ -551,7 +563,14 @@ Entity Component System (ECS),
 Finite State Machines (FSM),
 Cascaded PID Control,
 Memory Stability \& Lifecycle Management,
-ML Pipelines
+ML Pipelines,
+Physical-AI Digital Twins,
+Control Barrier Function (CBF) Invariant Safety Gates,
+Deterministic Safety Envelopes,
+Forward-Backward Sweep (FBS) AC Power Flow,
+Microclimate Boundary-Layer Modeling,
+Discrete Matrix Exponential ODE Integration,
+Bounded-Trajectory Barrier Filters
 }
 
 \newcommand{\dataScience}{
@@ -562,7 +581,13 @@ Feature Selection (Chi-square),
 Dimensionality Reduction (PCA),
 Welch's t-test (Side-Channel Analysis),
 Z-score \& Behavioral Modeling,
-NLP Metrics (BLEU, ROUGE, WER, CER)
+NLP Metrics (BLEU, ROUGE, WER, CER),
+Physics-Informed Machine Learning (Surrogate Modeling),
+Polynomial Feature Interaction,
+Isolation Forest (Sensor Anomaly Detection),
+Weibull Survival Analysis \& Remaining Useful Life (RUL),
+Paired t-tests \& Spearman Rank Correlation,
+Value of Lost Load (VoLL / LBNL ICE Calculator)
 }
 
 \newcommand{\artificialIntelligence}{
@@ -590,7 +615,13 @@ Post-Quantum Cryptography (PQC),
 Constraint Satisfaction,
 Multimodal AI Evaluation,
 Agentic Workflow Analysis,
-LLM-as-a-Judge
+LLM-as-a-Judge,
+Physical AI (Wave 4),
+LangGraph Cyclic StateGraph Workflows,
+Physics-Constrained Agentic Decision-Support,
+Autonomous Dispatch Optimization,
+Non-LLM Safety Verification Gates,
+Surrogate Physics Ridge Regression
 }
 
 \newcommand{\researchSkills}{
@@ -634,7 +665,18 @@ Side-Channel Timing Analysis,
 Game Engine Architecture,
 Computer Graphics,
 Video Decoding (FFmpeg),
-Audio Engineering
+Audio Engineering,
+IEEE C57.91 Annex G (Transformer Thermal Modeling),
+IEC 60076-7 (Loading Guide for Oil-Immersed Transformers),
+IEC 60287-1-1 (Underground Cable Thermal Resistivity \& Soil Dryout),
+IEEE Std 738 (Dynamic Line Rating \& Conductor Catenary Sag),
+ANSI C84.1 Voltage Standards,
+Arrhenius-Weibull Asset Aging \& Fragility Hazards,
+Fick's Law Cellulose Moisture Desorption,
+Oke/Evola Canyon Aerodynamics,
+Battery Energy Storage Systems (BESS) Coupled Electro-Thermal ODEs,
+Arrhenius SEI Capacity Degradation,
+NOAA IEM/ASOS \& ERA5-Land Ground-Truth Validation
 }
 
 

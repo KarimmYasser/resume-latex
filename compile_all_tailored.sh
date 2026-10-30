@@ -17,6 +17,9 @@ format_role() {
             ai) formatted_words+=("AI") ;;
             ml) formatted_words+=("ML") ;;
             cpp) formatted_words+=("CPP") ;;
+            hpc) formatted_words+=("HPC") ;;
+            swe) formatted_words+=("SWE") ;;
+            vois) formatted_words+=("VOIS") ;;
             *)
                 local first="$(echo "${w:0:1}" | tr '[:lower:]' '[:upper:]')"
                 local rest="${w:1}"

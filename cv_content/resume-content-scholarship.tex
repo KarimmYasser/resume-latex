@@ -16,102 +16,112 @@
 
 % SUMMARY
 \newcommand{\mySummary}{%
-\textbf{Computer Engineering Student} with a stellar academic record (\textbf{GPA: Excellent}) and a strong passion for advanced research in Artificial Intelligence, Cryptography, and Systems Architecture. Demonstrated research capability through complex projects including AI evaluation frameworks and quantum cryptography analysis. Proven leadership as a Session Lead and active involvement in extracurriculars (Enactus, IEEE). Highly motivated to pursue academic excellence, scholarships, and contribute to cutting-edge technological advancements.
+\textbf{Computer Engineering Researcher} at Cairo University (\textbf{GPA: 3.84 / 4.0}, top standing) specializing in \textbf{Physical-AI Digital Twins}, \textbf{Autonomous Multi-Agent Systems}, and \textbf{High-Performance Program Analysis}. Proven research track record across tier-1 industrial research at Siemens EDA (54.5x RTS optimization, 690x branch-arc reduction) and Nile University (autonomous multi-agent OpenFOAM CFD pipeline, 40-paper review). Hackathon winner (1st place ODC x INSTANT, 1st place I'SUPPLY). Committed to pursuing academic research excellence in AI systems, scientific ML, and hardware-software co-design.
 }
 
 % EDUCATION
 \newcommand{\myDegree}{Bachelor of Engineering in \textbf{Computer Engineering}}
 \newcommand{\myUniversity}{CAIRO UNIVERSITY, FACULTY OF ENGINEERING}
-\newcommand{\myEducationDate}{Sep 2022 - Jun 2027}
-\newcommand{\myGPA}{GPA: Excellent}
+\newcommand{\myEducationDate}{Sep 2022 - Jun 2027 (Expected)}
+\newcommand{\myGPA}{GPA: 3.84 / 4.0 (Top Standing)}
+\newcommand{\myCoursework}{Operating Systems, Computer Architecture, Advanced VLSI Design, Compilers, Distributed Systems, Parallel Computing, Microprocessors, Algorithms \& Data Structures, Machine Learning, Cryptography.}
 
 % WORK EXPERIENCE
 \newcommand{\experienceList}{%
-    {Session Lead}%
+    {AI Research Intern}%
+    {Nile University (SESC Research Center)}%
+    {Jul 2026 - Aug 2026}%
+    {%
+        \item Engineered an autonomous multi-agent pipeline translating natural language into verified OpenFOAM CFD simulations using local LLMs (Ollama/vLLM) on air-gapped infrastructure; authored a 40-paper SOTA literature review.
+        \item Architected a structured Intermediate Representation (IR) and deterministic C++ renderer across 18 solver families with OpenFOAM v13 guardrails; built a 3-level preflight gate eliminating up to $\sim$2 days of wasted compute time.
+        \item Containerized Docker validation with parallel Scotch decomposition (MPI, 10+ ranks), linear solver iteration bounding (15x speedup on 10.6M+ cells), automated 64 KB run snapshotting, and 288+ automated tests (79\%+ coverage).
+    }%
+    |||
+    {Software Engineer Intern (Systems \& Program Analysis)}%
+    {Siemens Digital Industries Software (EDA)}%
+    {Jul 2026 - Aug 2026}%
+    {%
+        \item Re-architected ingestion for the Commit-Based Analysis Tool (CAT), an RTS platform processing 3,275 test suites and 20.25M coverage rows (21 GB corpus) for Solido Design Environment; slashed build time from 23.6h to 26m (54.5x speedup).
+        \item Root-caused 45.7 GB OOM crashes; implemented bounded worker backpressure and per-source AST parser scratch nulling, reducing per-worker RSS from 1,613 MB to 378 MB (4.3x reduction) and pool footprint from $\sim$25 GB to $\sim$6 GB.
+        \item Formulated Branch-Arc Signatures clustering intra-function branch equivalence classes, proving a 690x reduction in explosive test selections with 100\% determinism; validated via cosmic-ray mutation testing (20/20 green baseline).
+        \item Derived mathematical size-adaptive dispatch ($f^* = 10\%$), engineered lock-free content-addressed AST cache (SHA-256), and cut NFS write latency by -59\% via bulk scratch writes and atomic symlinks.
+    }%
+    |||
+    {Backend Development Intern (DCX)}%
+    {Ejada Systems}%
+    {Jul 2026}%
+    {%
+        \item Architected a 6-service microservices backend in Spring Boot 3 / Spring Cloud with strict database-per-service isolation; built a distributed checkout saga with automated compensating transactions and Resilience4j circuit breakers.
+    }%
+    |||
+    {Session Lead \& Academic Mentor}%
     {Udacity (Digital Egypt Cubs Initiative - DECI)}%
     {Nov 2025 - Mar 2026}%
     {%
-        \item Led weekly academic sessions delivering core computer fundamentals and supported learners through rigorous guided explanations.
-    }%
-    |||
-    {Resource Management Team Member}%
-    {Enactus Cairo University}%
-    {Dec 2025 - Feb 2026}%
-    {%
-        \item Engaged in scientific problem validation processes including formal survey design, market research, and statistical data analysis to ensure solution relevance.
-    }%
-    |||
-    {Agentic AI Trainee}%
-    {Orange Digital Center Egypt}%
-    {Feb 2026 - Apr 2026}%
-    {%
-        \item Built autonomous AI agents, implementing memory and multi-agent collaboration based on state-of-the-art LLM architectures.
-    }%
-    |||
-    {Software Developer}%
-    {I'SUPPLY}%
-    {Jul 2025 - Dec 2025}%
-    {%
-        \item Won first place in a 30+ team university hackathon by architecting a scalable software solution under strict time constraints.
+        \item Instructed student cohorts in computer fundamentals, finite state machines, and quantum algorithms through interactive C/C++ coding labs; guided algorithmic problem-solving and code reviews.
     }%
     |||%
 }
 
 % PROJECTS
 \newcommand{\projectsList}{%
+    {Aug 2026}%
+    {https://github.com/KarimmYasser/thermal-sentinel-grid}%
+    {Thermal Sentinel Grid - Physical-AI Digital Twin (FortyGuard AI Hackathon)}%
+    {Designed and built a Physical-AI digital twin for monitoring transformer health and preventing power grid failures during extreme heatwaves. Architected a 4-layer platform combining environmental data ingestion, IEEE/IEC-compliant thermal simulations, a LangGraph autonomous planning engine, and deterministic AC power-flow safety validation. Built ML-based physics surrogates ($R^2=0.9987$), anomaly detection, and RUL estimation, estimating \$2.57M in avoided outage exposure (177 passing tests).}%
+    |||
     {Jun 2026}%
     {https://github.com/KarimmYasser/GSoCPathfinder}%
     {GSoC Pathfinder - AI Agent Organization Matcher}%
-    {Architected a complex \textbf{AI Agent matching engine} processing 11 years of historical data into a \textbf{dual-database} (Neo4j + Qdrant). Engineered a \textbf{high-performance Rust scoring engine} implementing a custom \textbf{7-Factor weighted ranking} algorithm with Jaccard similarity to holistically match candidates, demonstrating advanced algorithmic application and system design capabilities.}%
-    |||
-    {Mar 2026 - Apr 2026}%
-    {https://github.com/KarimmYasser/ai-eval-framework}%
-    {AI API Evaluation Framework (GSoC 2026 Research)}%
-    {Engineered a research-driven evaluation platform for Multimodal AI and Agentic Workflows following an extensive literature review. Implemented a \textbf{Dual-Metric Framework} to analyze model fidelity against human baselines.}%
-    |||
-    {Mar 2026}%
-    {}%
-    {Research Initiative: Quantum Foundations \& Post-Quantum Security}%
-    {Conducted extensive theoretical research into Quantum Computing foundations to analyze algorithmic threats to classical asymmetric cryptography. Investigated Code-Based and Lattice-Based Post-Quantum schemes.}%
-    |||
-    {Apr 2026}%
-    {https://github.com/KarimmYasser/hash-clash-keys-please}%
-    {Cryptographic Research: Multi-Architecture Hash Analysis}%
-    {Evaluated 10 distinct cryptographic hash architectures to analyze the trade-off between diffusion speed and structural integrity. Engineered a high-performance BLAKE-256 implementation in C.}%
-    |||
-    {Apr 2026 - May 2026}%
-    {https://github.com/KarimmYasser/robot-wall-follower}%
-    {Autonomous Wall-Following Robot (Sim-to-Real)}%
-    {Engineered bare-metal C firmware for ATmega328P with a Cascaded PID Controller. Bridged Webots Digital Twin simulation with physical hardware to validate control theory algorithms.}%
+    {Ingested 11 years of GSoC data (663 orgs, 12k+ projects) into a dual-database architecture (Neo4j temporal KG + Qdrant vector search). Engineered a high-performance Rust scoring engine (PyO3/Maturin) implementing 7-Factor weighted ranking with CV-frequency-weighted Jaccard similarity; deployed with FastAPI and React/Vite.}%
     |||
     {Feb 2026}%
     {https://github.com/KarimmYasser/braTs-ai-hackathon-ODCxINSTANT}%
-    {BioMedIAMBZ - Brain Tumor Segmentation (1st Place)}%
-    {Won 1st place in an AI Hackathon by developing a robust 3D brain tumor segmentation pipeline using MedNeXt with PyTorch, applying advanced computer vision techniques to medical imaging.}%
+    {BioMedIAMBZ - 3D Brain Tumor Segmentation (1st Place Winner)}%
+    {Won 1st place in the ODC x INSTANT AI Hackathon by developing a 3D medical segmentation pipeline using MedNeXt (ConvNeXt-based 3D CNN) with PyTorch and MONAI on BraTS 2021, outperforming Transformer baselines (UNETR, SwinUNETR) with a 40x faster preprocessing pipeline.}%
     |||
-    {Dec 2025}%
-    {https://github.com/KarimmYasser/FM_Stereo_System}%
-    {FM Stereo Broadcasting Simulation}%
-    {Implemented a software-defined FM Stereo system, conducting experimental analysis on frequency deviation, noise immunity, and overall communication robustness.}%
+    {Nov 2025 - Dec 2025}%
+    {https://github.com/KarimmYasser/VLSI-Convolution-Systolic-Accelerator}%
+    {VLSI 2D Convolution Systolic Accelerator (SKY130 PDK)}%
+    {Designed an 8x8 systolic array 2D convolution accelerator in Verilog for neural network inference. Completed full RTL-to-GDSII flow via OpenLane on SKY130 PDK, implementing ping-pong memory buffering and fixed-point arithmetic.}%
+    |||
+    {Oct 2025 - Dec 2025}%
+    {https://github.com/KarimmYasser/stall_3alda2ery}%
+    {5-Stage Pipelined 32-Bit Processor}%
+    {Designed a 32-bit 5-stage pipelined processor in VHDL with Von Neumann architecture, hazard detection, data forwarding, branch prediction, and interrupt handling; built a custom Python assembler to generate machine code.}%
+    |||
+    {Apr 2026}%
+    {https://github.com/KarimmYasser/crypto-hash-architecture-analysis}%
+    {Cryptographic Research: Multi-Architecture Hash Competition}%
+    {Evaluated 10 hash architectures (BLAKE, Keccak, Skein); implemented a custom BLAKE-256 in C using ARX primitives and loop unrolling, achieving a 0.9998 Strict Avalanche Criterion (SAC) score; patched Length-Extension Attack vulnerabilities.}%
+    |||
+    {Apr 2026 - May 2026}%
+    {https://github.com/KarimmYasser/robot-wall-follower}%
+    {Autonomous Wall-Following Robot (Sim-to-Real Development)}%
+    {Engineered bare-metal C firmware for ATmega328P with nested Cascaded PID control (wall distance within IMU heading loop) and first-order lag filters. Bridged Webots Digital Twin simulation with physical hardware via Bluetooth telemetry.}%
+    |||
+    {Dec 2024}%
+    {https://github.com/KarimmYasser/Intrusion-Detection-Systems}%
+    {Adaptive Intrusion Detection via Behavioral Modeling (7th Place TCCD)}%
+    {Engineered an anomaly-based network intrusion detection system analyzing 148k+ events across 37 attack types (RRE-KDD dataset) using Random Forest ensembles, Z-score moving averages, and Chi-square feature selection.}%
     |||%
 }
 
 % TECHNICAL SKILLS
-\newcommand{\programmingLanguages}{Python, C/C++, Rust, Kotlin, Dart, MATLAB, R}
+\newcommand{\programmingLanguages}{C, C++ (C++11/14/17), Rust, Python, Verilog, VHDL, Java, Kotlin, Dart, TypeScript, SQL, Assembly}
 \newcommand{\mobileDevelopment}{}
-\newcommand{\frameworksLibraries}{PyTorch, MONAI, LangChain, OpenCV, NumPy, SciPy}
-\newcommand{\backendDatabase}{}
-\newcommand{\developmentTools}{}
-\newcommand{\softwareEngineering}{System Design, Finite State Machines, Control Systems, Cryptography}
-\newcommand{\dataScience}{}
-\newcommand{\artificialIntelligence}{Deep Learning, Post-Quantum Cryptography, Quantum Algorithms, Computer Vision}
-\newcommand{\researchSkills}{Academic Writing, Literature Review, Problem Formulation, Experimental Design, Survey Design}
-\newcommand{\specializedSkills}{}
+\newcommand{\frameworksLibraries}{PyTorch, MONAI, PyTorch Lightning, Scikit-learn, LangGraph, LangChain, NumPy, SciPy, FastAPI, Spring Boot 3}
+\newcommand{\backendDatabase}{SQLite (WAL \& Internals), PostgreSQL (Supabase), MySQL, Neo4j, Qdrant, Redis}
+\newcommand{\developmentTools}{Docker, OpenMP/MPI, Linux/POSIX, Git, OpenLane, SKY130 PDK, ModelSim, ATmega328P, Webots}
+\newcommand{\softwareEngineering}{Regression Test Selection (RTS), Branch-Arc Signatures, Mutation Testing, Content-Addressed Caching (SHA-256), Distributed Sagas}
+\newcommand{\dataScience}{Physics-Informed Surrogate Modeling, Non-linear ODE Integration, Chi-Square Selection, Weibull Survival Analysis}
+\newcommand{\artificialIntelligence}{Multi-Agent Systems, Agent Harness Engineering, Model Context Protocol (MCP), Control Barrier Functions (CBF), 3D Medical Segmentation}
+\newcommand{\researchSkills}{SOTA Literature Review (40-Paper CFD/LLM), Benchmark Formulation, Experimental Design, Statistical Hypothesis Testing}
+\newcommand{\specializedSkills}{OpenFOAM CFD C++ Case Generation, SPICE Analog Waveform Analysis (RAW/PSF), IEEE C57.91, IEC 60076-7, IEEE 738}
 
-% CORE COMPETENCIES
-\newcommand{\problemSolving}{Critical thinking, Analytical reasoning, Theoretical analysis, Scientific method}
-\newcommand{\leadership}{Academic mentoring, Extracurricular leadership, Public speaking}
-\newcommand{\communication}{Research presentation, Technical writing, Cross-disciplinary collaboration}
-\newcommand{\continuousLearning}{Scientific literature review, Advanced mathematics adoption, Intellectual curiosity}
+% CORE COMPETENCIES & HONORS
+\newcommand{\problemSolving}{Analytical rigor, mathematical modeling, Amdahl's Law optimization, root-cause autopsy}
+\newcommand{\leadership}{Academic mentoring (Udacity DECI), technical instruction (IEEE CU), Agile/Scrum sprint coordination}
+\newcommand{\communication}{Research synthesis, technical documentation, bilingual technical communication (Arabic/English)}
+\newcommand{\continuousLearning}{1st Place ODC x INSTANT BraTS AI Hackathon (2026), 1st Place I'SUPPLY Hackathon (2025), 7th Place TCCD Research Day (2024)}
 % ============================================================
-

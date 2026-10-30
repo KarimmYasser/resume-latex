@@ -133,6 +133,9 @@ leftmargin=10pt
 \begin{document}
 \input{resume-content.tex}
 
+\ifcsdef{customDocumentBody}{%
+	\customDocumentBody
+}{%
 \newcommand{\AND}{\unskip
 	\cleaders\copy\ANDbox\hskip\wd\ANDbox
 	\ignorespaces
@@ -313,5 +316,6 @@ leftmargin=10pt
 		\item \textbf{Honors \& Competitions:} \continuousLearning
 	\end{highlights}
 }
+}%
 
 \end{document}

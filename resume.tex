@@ -64,9 +64,9 @@ linkcolor=accentColor
 \setlength{\columnsep}{0.15cm}
 \pagenumbering{gobble}
 
-\titleformat{\section}{\needspace{2.5\baselineskip}\bfseries\large\color{sectionColor}}{}{0pt}{}[\vspace{1pt}{\titlerule}]
+\titleformat{\section}{\needspace{2.5\baselineskip}\bfseries\large\color{sectionColor}}{}{0pt}{}[\vspace{2pt}{\titlerule}\vspace{3pt}]
 
-\titlespacing{\section}{-1pt}{0.18 cm}{0.06 cm}
+\titlespacing{\section}{-1pt}{0.15 cm}{0.08 cm}
 
 \renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
 \newenvironment{highlights}{
@@ -133,6 +133,10 @@ leftmargin=10pt
 \begin{document}
 \input{resume-content.tex}
 
+% Enforce minimum spacing between section headers/rules and body text even if overridden in content files
+\titleformat{\section}{\needspace{2.5\baselineskip}\bfseries\large\color{sectionColor}}{}{0pt}{}[\vspace{2pt}{\titlerule}\vspace{3pt}]
+\titlespacing{\section}{-1pt}{0.15 cm}{0.08 cm}
+
 \ifcsdef{customDocumentBody}{%
 	\customDocumentBody
 }{%
@@ -175,14 +179,12 @@ leftmargin=10pt
 \vspace{-0.15 cm}
 
 \section{Summary}
+\vspace{0.04cm}
 \begin{onecolentry}
-	\begin{highlights}
-		\mySummary
-	\end{highlights}
+	\mySummary
 \end{onecolentry}
 
 \section{Education}
-\vspace{0.08cm}
 \begin{twocolentry}{\myEducationDate}
 	\textbf{\myUniversity}
 \end{twocolentry}
@@ -191,7 +193,6 @@ leftmargin=10pt
 \ifcsdef{myCoursework}{\ifdefempty{\myCoursework}{}{\\\vspace{0.04cm}{\small\textbf{Relevant Coursework:} \myCoursework}}}{}
 
 \section{Experience}
-\vspace{0.12cm}
 
 \newcommand{\experienceItem}[4]{%
 	\begin{samepage}%
@@ -226,7 +227,6 @@ leftmargin=10pt
 \expandafter\processExperiences\expandafter{\experienceList}
 
 \section{Projects}
-\vspace{0.08 cm}
 
 \def\splitProjectLink#1|#2|#3\relax{%
 	\ifblank{#2}{%
@@ -280,7 +280,6 @@ leftmargin=10pt
 
 \begin{samepage}
 	\section{Technical Skills}
-\vspace{0.06cm}
 \newcommand{\skillItem}[2]{\ifdefempty{#2}{}{\item \textbf{#1:} #2}}
 \ifcsdef{customTechnicalSkills}{%
 	\begin{highlights}
@@ -303,7 +302,6 @@ leftmargin=10pt
 \end{samepage}
 
 \section{Core Competencies \& Honors}
-\vspace{0.06cm}
 \ifcsdef{customCompetencies}{%
 	\begin{highlights}
 		\customCompetencies
